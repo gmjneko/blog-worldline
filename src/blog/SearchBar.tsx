@@ -35,7 +35,7 @@ export function SearchBar({ onChange, onSubmit, value }: SearchBarProps) {
           type="search"
           value={value}
           onChange={handleChange}
-          placeholder="搜索标题、摘要或分类…"
+          placeholder="搜索标题、摘要或分类"
         />
       </label>
       <button type="submit">搜索</button>
