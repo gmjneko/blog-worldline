@@ -95,7 +95,7 @@ function BlogLayout({
 
 function About() {
   usePageMetadata(
-    'GMJneko ｜ 关于我',
+    'GMJneko | 关于我',
     '关于我、个人项目与联系方式。',
   )
 
@@ -231,7 +231,7 @@ function BlogIndex({
 function PostDetail({ categorySlug, postSlug }: { categorySlug: string; postSlug: string }) {
   const post = findPost(categorySlug, postSlug)
   usePageMetadata(
-    post ? `${post.title} — GMJneko’s Blog` : '文章不存在 ｜ GMJneko’s Blog',
+    post ? `${post.title} — GMJneko’s Blog` : '文章不存在 | GMJneko’s Blog',
     post?.description ?? '没有找到对应的文章。',
   )
 
