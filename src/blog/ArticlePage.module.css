@@ -1,8 +1,8 @@
 .layout {
-  width: min(1040px, 100%);
+  width: min(1060px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 760px) 240px;
+  grid-template-columns: minmax(0, 760px) 260px;
   align-items: start;
   gap: 40px;
 }
@@ -165,7 +165,7 @@
   --prose-block-spacing: 16px;
 
   padding-top: 48px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--wl-font-mono);
 }
 
 .article .prose {
