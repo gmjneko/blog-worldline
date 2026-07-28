@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { AboutPage } from './about/AboutPage'
 import {
   ArticlePage,
   CategoryFilter,
@@ -55,29 +56,66 @@ function usePageMetadata(title: string, description: string) {
   }, [description, title])
 }
 
-const navigation = [
-  { href: '/', label: '博客', active: true },
-  { href: '/#categories', label: '分类' },
-  { href: '/#posts', label: '文章' },
-  { href: '/#search', label: '搜索' },
-]
+type NavigationSection = 'blog' | 'about'
 
-function BlogLayout({ children }: { children: React.ReactNode }) {
+function getNavigation(activeSection: NavigationSection) {
+  return [
+    { href: '/', label: '博客', active: activeSection === 'blog' },
+    { href: '/cabin', label: '小屋', disabled: true },
+    { href: '/friends', label: '友链', disabled: true },
+    { href: '/about', label: '关于我', active: activeSection === 'about' },
+  ]
+}
+
+function BlogLayout({
+  children,
+  activeSection = 'blog',
+}: {
+  children: React.ReactNode
+  activeSection?: NavigationSection
+}) {
   return (
     <div id="top" className="blog-page">
       <div className="ambient ambient--one" aria-hidden="true" />
       <div className="ambient ambient--two" aria-hidden="true" />
 
       <SiteHeader
-        brand="Meika’s Blog"
+        brand="GMJneko"
         brandHref="/"
-        brandLabel="Meika’s Blog 首页"
+        brandLabel="博客"
         brandLogoSrc="/atri.png"
-        navigation={navigation}
+        navigation={getNavigation(activeSection)}
       />
 
       {children}
     </div>
+  )
+}
+
+function About() {
+  usePageMetadata(
+    'GMJneko ｜ 关于我',
+    '关于我、个人项目与联系方式。',
+  )
+
+  return (
+    <BlogLayout activeSection="about">
+      <PageShell className="blog-main" contentClassName="blog-shell about-shell">
+        <AboutPage />
+
+        <SiteFooter
+          className="blog-footer"
+          brand="GMJneko’s Blog"
+          brandHref="/"
+          meta={
+            <>
+              <span>ABOUT / PROFILE</span>
+              <span>© 2026</span>
+            </>
+          }
+        />
+      </PageShell>
+    </BlogLayout>
   )
 }
 
@@ -97,8 +135,8 @@ function BlogIndex({
   const [query, setQuery] = useState('')
 
   usePageMetadata(
-    'Meika’s Blog — Posts',
-    '关于代码、设计和长期维护数字产品的文章。',
+    'GMJneko | 博客',
+    '博客文章列表。',
   )
 
   const categoryPosts = useMemo(
@@ -120,10 +158,6 @@ function BlogIndex({
     )
   }, [categoryPosts, query])
 
-  const activeCategory = categories.find(
-    (category) => category.slug === selectedCategory,
-  )
-
   const handleCategorySelect = (slug: string) => {
     const nextUrl = new URL(window.location.href)
     if (slug === 'all') nextUrl.searchParams.delete('category')
@@ -136,26 +170,14 @@ function BlogIndex({
     <BlogLayout>
       <PageShell className="blog-main" contentClassName="blog-shell">
         <section className="blog-intro" aria-labelledby="blog-title">
-          <p className="eyebrow">MEIKA’S BLOG / WRITING</p>
+          <p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>
           <h1 id="blog-title">POSTS</h1>
-          <p className="blog-description">
-            关于代码、设计和长期维护数字产品的文章。
-            <br />
-            分类来自内容目录，默认显示全部文章。
-          </p>
 
           <CategoryFilter
             categories={categories}
             current={selectedCategory}
             onSelect={handleCategorySelect}
           />
-
-          {activeCategory && (
-            <p className="active-category-description">
-              <strong>{activeCategory.name}</strong>
-              {activeCategory.description}
-            </p>
-          )}
 
           <div id="search" className="blog-search">
             <SearchBar value={query} onChange={setQuery} />
@@ -191,7 +213,7 @@ function BlogIndex({
 
         <SiteFooter
           className="blog-footer"
-          brand="Meika’s Blog"
+          brand="GMJneko’s Blog"
           brandHref="/"
           meta={
             <>
@@ -208,7 +230,7 @@ function BlogIndex({
 function PostDetail({ categorySlug, postSlug }: { categorySlug: string; postSlug: string }) {
   const post = findPost(categorySlug, postSlug)
   usePageMetadata(
-    post ? `${post.title} — Meika’s Blog` : '文章不存在 — Meika’s Blog',
+    post ? `${post.title} — GMJneko’s Blog` : '文章不存在 ｜ GMJneko’s Blog',
     post?.description ?? '没有找到对应的文章。',
   )
 
@@ -244,6 +266,10 @@ function App() {
 
   if (postRoute) {
     return <PostDetail {...postRoute} />
+  }
+
+  if (location.pathname === '/about' || location.pathname === '/about/') {
+    return <About />
   }
 
   if (location.pathname !== '/') {

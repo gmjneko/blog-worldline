@@ -1,0 +1,279 @@
+.page {
+  padding: 72px 0 0;
+}
+
+.intro {
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: center;
+  gap: clamp(56px, 9vw, 112px);
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--wl-color-text-weak);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.intro h1 {
+  margin: 0;
+  color: var(--wl-color-text-strong);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+}
+
+.intro h1 span {
+  display: block;
+  margin-top: 8px;
+  color: var(--wl-color-text-weak);
+  font-size: 0.42em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.prose {
+  max-width: 640px;
+  margin-top: 40px;
+}
+
+.prose p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 2;
+}
+
+.prose p + p {
+  margin-top: 16px;
+}
+
+.prose strong {
+  color: var(--wl-color-text-strong);
+  font-weight: 700;
+}
+
+.portrait {
+  margin: 0;
+}
+
+.portraitFrame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--wl-color-border);
+  background: var(--wl-color-background-weak);
+}
+
+.portraitFrame::after {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgb(255 255 255 / 34%);
+  content: '';
+  pointer-events: none;
+}
+
+.portraitFrame img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.88) contrast(0.96);
+}
+
+.portrait figcaption {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--wl-color-text-weak);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.section {
+  border-top: 1px solid var(--wl-color-border);
+}
+
+.sectionHeader {
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: var(--wl-color-text-weak);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.sectionHeader span {
+  color: var(--wl-color-text-strong);
+}
+
+.sectionHeader p {
+  margin: 0;
+}
+
+.project {
+  min-height: 138px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  border: 1px solid var(--wl-color-border);
+  background: color-mix(
+    in srgb,
+    var(--wl-color-background-weak) 58%,
+    transparent
+  );
+}
+
+.project h2 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 3vw, 30px);
+  letter-spacing: -0.04em;
+}
+
+.project a {
+  color: var(--wl-color-text-strong);
+  text-decoration: none;
+}
+
+.project h2 a:hover,
+.projectDescription:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.projectDescription {
+  color: var(--wl-color-text) !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.projectMeta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.projectMeta > a:first-child {
+  padding: 6px 9px;
+  border: 1px solid var(--wl-color-border);
+  color: var(--wl-color-text-weak);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.projectMeta > a:first-child:hover {
+  color: var(--wl-color-text-strong);
+  border-color: var(--wl-color-text-strong);
+}
+
+.projectArrow {
+  font-size: 20px;
+}
+
+.contact {
+  padding: 20px 0 8px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.35fr);
+  gap: 48px;
+}
+
+.contact h2 {
+  margin: 0;
+  color: var(--wl-color-text-strong);
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.contact dl {
+  margin: 0;
+}
+
+.contact dl > div {
+  padding: 18px 0;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 20px;
+  border-top: 1px solid var(--wl-color-border);
+}
+
+.contact dl > div:last-child {
+  border-bottom: 1px solid var(--wl-color-border);
+}
+
+.contact dt,
+.contact dd {
+  margin: 0;
+}
+
+.contact dt {
+  color: var(--wl-color-text-weak);
+  font-size: 12px;
+}
+
+.contact dt span {
+  margin-right: 6px;
+}
+
+.contact a {
+  color: var(--wl-color-text-strong);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 48rem) {
+  .page {
+    padding-top: 48px;
+  }
+
+  .intro {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    align-items: start;
+    gap: 40px;
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding-top: 40px;
+  }
+
+  .intro {
+    padding-bottom: 52px;
+    grid-template-columns: 1fr;
+  }
+
+  .portrait {
+    width: min(260px, 82%);
+  }
+
+  .prose {
+    margin-top: 30px;
+  }
+
+  .project {
+    min-height: 0;
+    padding: 22px;
+    flex-direction: column;
+  }
+
+  .projectMeta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .contact dl > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

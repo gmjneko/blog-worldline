@@ -1,4 +1,4 @@
-# Meika’s Blog 内容系统
+# GMJneko’s Blog 内容系统
 
 本文档定义博客分类、文章目录、Markdown Front Matter、图片资源、URL 和构建校验规则。
 

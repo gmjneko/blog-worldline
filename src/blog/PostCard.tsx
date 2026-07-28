@@ -32,11 +32,6 @@ export function PostCard({ post }: PostCardProps) {
 
           <h2>{post.title}</h2>
           <p>{post.description}</p>
-
-          <span className={styles.readMore}>
-            READ POST
-            <span aria-hidden="true">↗</span>
-          </span>
         </div>
       </article>
     </a>

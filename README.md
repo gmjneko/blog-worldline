@@ -1,4 +1,4 @@
-# Meika’s Blog
+# GMJneko’s Blog
 
 一个使用 React、TypeScript 和 Vite 构建的 Markdown 博客。
 

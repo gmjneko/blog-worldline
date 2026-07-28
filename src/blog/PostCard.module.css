@@ -16,7 +16,7 @@
 }
 
 .article {
-  min-height: 210px;
+  min-height: 170px;
   padding: 24px;
   display: flex;
   gap: 20px;
@@ -86,25 +86,13 @@
   -webkit-line-clamp: 3;
 }
 
-.readMore {
-  margin-top: auto;
-  padding-top: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--wl-color-text-weak);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-}
-
-.card:hover .readMore,
 .card:hover h2 {
   color: var(--wl-color-text-strong);
 }
 
 @media (max-width: 40rem) {
   .article {
-    min-height: 190px;
+    min-height: 160px;
     padding: 20px;
     gap: 16px;
   }

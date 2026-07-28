@@ -47,17 +47,22 @@
   font-weight: 600;
 }
 
+.navigationLinkDisabled {
+  color: var(--wl-color-text-weak);
+  cursor: default;
+}
+
+.navigationLinkDisabled:hover {
+  border-color: transparent;
+}
+
 .mobileMenu {
   display: none;
 }
 
 @media (max-width: 60rem) {
   .desktopNav {
-    gap: 22px;
-  }
-
-  .navigationLink {
-    display: none;
+    gap: 18px;
   }
 }
 
@@ -128,11 +133,29 @@
     backdrop-filter: blur(16px) saturate(150%);
   }
 
-  .mobileMenu nav a {
+  .mobileMenu nav > a,
+  .mobileMenu nav > span {
     padding: 12px 0;
     border-bottom: 1px solid var(--wl-color-border);
     color: var(--wl-color-text-strong);
     text-decoration: none;
+  }
+
+  .mobileMenu nav > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobileMenu nav > span small {
+    color: var(--wl-color-text-weak);
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+
+  .mobileMenu nav .mobileDisabled {
+    color: var(--wl-color-text-weak);
   }
 
   .mobileMenu nav a[aria-current='page'] {

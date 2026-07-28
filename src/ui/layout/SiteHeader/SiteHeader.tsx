@@ -5,6 +5,7 @@ import styles from './SiteHeader.module.css'
 
 export interface NavigationItem {
   active?: boolean
+  disabled?: boolean
   href: string
   label: ReactNode
 }
@@ -34,16 +35,27 @@ export function SiteHeader({
         </Wordmark>
 
         <nav className={styles.desktopNav} aria-label="主导航">
-          {navigation.map((item) => (
-            <a
-              className={styles.navigationLink}
-              key={item.href}
-              href={item.href}
-              aria-current={item.active ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) =>
+            item.disabled ? (
+              <span
+                className={`${styles.navigationLink} ${styles.navigationLinkDisabled}`}
+                key={item.href}
+                aria-disabled="true"
+                title="暂未开放"
+              >
+                {item.label}
+              </span>
+            ) : (
+              <a
+                className={styles.navigationLink}
+                key={item.href}
+                href={item.href}
+                aria-current={item.active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ),
+          )}
           {action && (
             <Button href={action.href} icon={<span aria-hidden="true">↓</span>}>
               {action.label}
@@ -57,15 +69,26 @@ export function SiteHeader({
             <span />
           </summary>
           <nav aria-label="移动端导航">
-            {navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                aria-current={item.active ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navigation.map((item) =>
+              item.disabled ? (
+                <span
+                  className={styles.mobileDisabled}
+                  key={item.href}
+                  aria-disabled="true"
+                >
+                  {item.label}
+                  <small>COMING SOON</small>
+                </span>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={item.active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              ),
+            )}
             {action && (
               <a className={styles.mobileAction} href={action.href}>
                 {action.label}
