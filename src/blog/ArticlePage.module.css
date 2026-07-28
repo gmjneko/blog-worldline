@@ -1,7 +1,89 @@
-.article {
-  width: min(760px, 100%);
+.layout {
+  width: min(1040px, 100%);
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 760px) 240px;
+  align-items: start;
+  gap: 40px;
+}
+
+.layoutWithoutToc {
+  width: min(760px, 100%);
+  grid-template-columns: minmax(0, 760px);
+}
+
+.article {
+  min-width: 0;
+  width: 100%;
   padding: 32px 0 96px;
+}
+
+.toc {
+  position: sticky;
+  top: calc(var(--wl-header-height) + 24px);
+  max-height: calc(100vh - var(--wl-header-height) - 48px);
+  margin-top: 32px;
+  overflow: auto;
+  align-self: start;
+}
+
+.tocPanel {
+  padding: 16px;
+  border: 1px solid var(--wl-color-border);
+  background: rgb(255 255 255 / 52%);
+}
+
+.tocTitle {
+  margin: 0 0 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--wl-color-border);
+  color: var(--wl-color-text-strong);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tocList {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  list-style: none;
+}
+
+.tocLink {
+  margin: 0 -8px;
+  padding: 4px 8px;
+  display: block;
+  overflow: hidden;
+  color: color-mix(
+    in srgb,
+    var(--wl-color-text) 68%,
+    var(--wl-color-text-strong)
+  );
+  font-size: 14px;
+  line-height: 1.55;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    color var(--wl-duration-fast) var(--wl-ease-standard),
+    background var(--wl-duration-fast) var(--wl-ease-standard);
+}
+
+.tocLink:hover,
+.tocLinkActive {
+  color: var(--wl-color-background);
+  background: color-mix(
+    in srgb,
+    var(--wl-color-text-strong) 86%,
+    var(--wl-color-background)
+  );
+}
+
+.tocLinkNested {
+  padding-left: 20px;
+  font-size: 13px;
 }
 
 .backLink {
@@ -101,11 +183,13 @@
   margin: 2.4em 0 0.8em;
   font-size: 24px;
   letter-spacing: -0.035em;
+  scroll-margin-top: calc(var(--wl-header-height) + 24px);
 }
 
 .prose h3 {
   margin: 2em 0 0.75em;
   font-size: 19px;
+  scroll-margin-top: calc(var(--wl-header-height) + 24px);
 }
 
 .prose p,
@@ -335,6 +419,18 @@
 .footer a {
   color: var(--wl-color-text-strong);
   text-decoration: none;
+}
+
+@media (max-width: 70rem) {
+  .layout,
+  .layoutWithoutToc {
+    width: min(760px, 100%);
+    display: block;
+  }
+
+  .toc {
+    display: none;
+  }
 }
 
 @media (max-width: 40rem) {
