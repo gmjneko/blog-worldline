@@ -1,195 +1,140 @@
-import {
-  Badge,
-  Button,
-  CodePanel,
-  FigureGrid,
-  PageShell,
-  RuleList,
-  Section,
-  SiteFooter,
-  SiteHeader,
-  Tabs,
-  TerminalPanel,
-} from './ui'
+import { useMemo, useState } from 'react'
+import { PostCard, SearchBar, posts } from './blog'
+import { PageShell, SiteFooter, SiteHeader } from './ui'
 import './App.css'
 
-const systemSamples = [
-  {
-    id: 'direction',
-    label: 'direction',
-    value: 'cat ./design-direction.txt',
-  },
-  {
-    id: 'type',
-    label: 'type',
-    value: 'font-family: "IBM Plex Mono", monospace;',
-  },
-  {
-    id: 'layout',
-    label: 'layout',
-    value: 'max-width: 1080px; padding-inline: 80px;',
-  },
-]
-
-const principles = [
-  {
-    title: '单色系统',
-    description: '用暖白、近黑和少量灰阶建立层级，让内容成为页面里最醒目的部分。',
-  },
-  {
-    title: '严格网格',
-    description: '页面、区块和组件共用同一组边界，留白不是装饰，而是结构的一部分。',
-  },
-  {
-    title: '等宽排版',
-    description: '文本保持技术文档般的秩序感，强调信息密度，而不是制造营销感。',
-  },
-  {
-    title: '克制交互',
-    description: '状态只通过颜色、边线和短距离变化表达，不使用夸张阴影与漂浮动画。',
-  },
-]
-
-const terminalTasks = [
-  {
-    title: 'Layout',
-    description: 'single shell / 1080px / thin rules',
-  },
-  {
-    title: 'Typography',
-    description: 'monospace / measured rhythm / quiet hierarchy',
-  },
-  {
-    active: true,
-    title: 'Rendering preview',
-    description: 'light, responsive, content-first',
-  },
-]
-
-const terminalContext = [
-  {
-    label: 'Context',
-    values: ['4 constraints', '100% aligned'],
-  },
-  {
-    label: 'Surface',
-    values: ['web / responsive', 'theme / system'],
-  },
-]
-
-const figures = [
-  { pattern: 'lines' as const, value: '1080', label: '页面最大宽度' },
-  { pattern: 'dots' as const, value: '01', label: '主强调颜色' },
-  { pattern: 'bars' as const, value: '04', label: '基础间距单位' },
-]
-
 const navigation = [
-  { href: '#top', label: 'Index' },
-  { href: '#system', label: 'System' },
-  { href: '#principles', label: 'Principles' },
-  { href: '#about', label: 'About' },
+  { href: '#articles', label: '文章', active: true },
+  { href: '#notes', label: '随记' },
+  { href: '#projects', label: '项目' },
+  { href: '#about', label: '关于' },
 ]
+
+function RssIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="3.25" cy="12.75" r="1" />
+      <path d="M3 7.25a5.75 5.75 0 0 1 5.75 5.75M3 3a10 10 0 0 1 10 10" />
+    </svg>
+  )
+}
 
 function App() {
+  const [query, setQuery] = useState('')
+
+  const filteredPosts = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase()
+    if (!normalizedQuery) return posts
+
+    return posts.filter((post) =>
+      [post.title, post.excerpt, post.category].some((value) =>
+        value.toLocaleLowerCase().includes(normalizedQuery),
+      ),
+    )
+  }, [query])
+
   return (
-    <PageShell id="top">
+    <div id="top" className="blog-page">
+      <div className="ambient ambient--one" aria-hidden="true" />
+      <div className="ambient ambient--two" aria-hidden="true" />
+
       <SiteHeader
-        brandLabel="Worldline 首页"
+        brand="Meika’s Blog"
+        brandLabel="Meika’s Blog 首页"
         navigation={navigation}
-        action={{ href: '#system', label: '查看规范' }}
       />
 
-      <Section
-        id="system"
-        variant="hero"
-        headingLevel={1}
-        eyebrow={
-          <div className="announcement">
-            <Badge>新</Badge>
-            <p>这是一个用于检查视觉方向的单页原型。</p>
-            <a href="#principles">查看系统</a>
+      <PageShell className="blog-main" contentClassName="blog-shell">
+        <section className="blog-intro" aria-labelledby="blog-title">
+          <div className="blog-heading-row">
+            <div>
+              <p className="eyebrow">WORLDLINE / WRITING</p>
+              <h1 id="blog-title">博客</h1>
+              <p className="blog-description">
+                关于代码、设计和长期维护数字产品的笔记。
+                <br />
+                写下解决问题的过程，也记录那些暂时没有答案的问题。
+              </p>
+            </div>
+
+            <a id="rss" className="rss-link" href="#rss" aria-label="订阅 RSS">
+              <RssIcon />
+              RSS
+            </a>
           </div>
-        }
-        title="记录思考，而不是制造噪音。"
-        description={
-          <p className="hero-description">
-            一个克制、清晰的数字空间。用严格的网格、等宽字体和有限的颜色，
-            <br className="desktop-break" />
-            让内容保持安静而有力量。
+
+          <SearchBar value={query} onChange={setQuery} />
+
+          <div className="article-count" aria-live="polite">
+            <span>ARTICLES / INDEX</span>
+            <span>
+              {String(filteredPosts.length).padStart(2, '0')} /{' '}
+              {String(posts.length).padStart(2, '0')}
+            </span>
+          </div>
+        </section>
+
+        <section id="articles" aria-label="文章列表">
+          {filteredPosts.length > 0 ? (
+            <div className="post-grid">
+              {filteredPosts.map((post) => (
+                <PostCard key={post.slug} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <span>[0]</span>
+              <h2>没有找到匹配的文章</h2>
+              <p>尝试缩短关键词，或者搜索其他主题。</p>
+              <button type="button" onClick={() => setQuery('')}>
+                清除搜索
+              </button>
+            </div>
+          )}
+        </section>
+
+        <section id="notes" className="blog-note">
+          <div>
+            <p className="eyebrow">NOTES / 2026</p>
+            <h2>不定期更新，保持长期可读。</h2>
+          </div>
+          <p>
+            这里不会追逐更新频率。文章会在问题得到验证、想法变得清楚之后发布，
+            并在需要时继续修订。
           </p>
-        }
-      >
-        <Tabs
-          ariaLabel="设计系统示例"
-          items={systemSamples.map((sample) => ({
-            id: sample.id,
-            label: sample.label,
-            content: <CodePanel code={sample.value} embedded />,
-          }))}
+        </section>
+
+        <section id="projects" className="projects-strip" aria-label="项目状态">
+          <span>[*] Worldline UI</span>
+          <span>React + TypeScript</span>
+          <span>STATUS: BUILDING</span>
+        </section>
+
+        <section id="about" className="about-section">
+          <div>
+            <p className="eyebrow">ABOUT</p>
+            <h2>Worldline 是一个个人数字花园。</h2>
+          </div>
+          <div className="about-copy">
+            <p>
+              它用来保存技术实践、设计判断和日常观察。页面刻意保持简单，
+              让内容可以在多年之后继续被阅读，而不依赖当下流行的视觉效果。
+            </p>
+            <a href="mailto:hello@example.com">hello@example.com ↗</a>
+          </div>
+        </section>
+
+        <SiteFooter
+          className="blog-footer"
+          meta={
+            <>
+              <span>RSS / GitHub / Email</span>
+              <span>© 2026</span>
+            </>
+          }
         />
-      </Section>
-
-      <TerminalPanel
-        aria-label="终端界面风格示例"
-        title="worldline / visual-study"
-        branch="main"
-        prompt="inspect current direction"
-        subtitle="Reading constraints and visual tokens…"
-        tasks={terminalTasks}
-        context={terminalContext}
-      />
-
-      <Section
-        id="principles"
-        title="什么构成了这种风格？"
-        description="它不是一组装饰效果，而是一套持续限制视觉噪音的规则。"
-      >
-        <RuleList items={principles} />
-        <Button className="section-button" href="#metrics">
-          继续查看
-        </Button>
-      </Section>
-
-      <Section
-        id="metrics"
-        title="一个有限的视觉系统"
-        index="FIG. 01—03"
-        description={
-          <p className="indented-description">
-            <span>[*]</span>
-            通过少量可复用规则，让不同内容仍然保持同一种语气。
-          </p>
-        }
-      >
-        <FigureGrid items={figures} />
-      </Section>
-
-      <Section
-        id="about"
-        variant="split"
-        title="只保留必要的信息"
-        description={
-          <p className="indented-description">
-            <span>[*]</span>
-            这个页面仅用于确认设计语言。目前没有文章、分类、搜索或内容系统。
-          </p>
-        }
-        actions={
-          <Button href="#top" variant="secondary">
-            返回顶部
-          </Button>
-        }
-      />
-
-      <SiteFooter
-        meta={
-          <>
-            <span>Visual direction study</span>
-            <span>© 2026</span>
-          </>
-        }
-      />
-    </PageShell>
+      </PageShell>
+    </div>
   )
 }
 

@@ -1,0 +1,219 @@
+.card {
+  min-width: 0;
+  display: block;
+  border-right: 1px solid var(--wl-color-border);
+  border-bottom: 1px solid var(--wl-color-border);
+  color: inherit;
+  background: rgb(255 255 255 / 42%);
+  text-decoration: none;
+  transition:
+    background var(--wl-duration-fast) var(--wl-ease-standard),
+    color var(--wl-duration-fast) var(--wl-ease-standard);
+}
+
+.card:hover {
+  background: rgb(248 247 247 / 82%);
+}
+
+.article {
+  min-height: 246px;
+  padding: 28px;
+  display: flex;
+  gap: 24px;
+}
+
+.cover {
+  position: relative;
+  width: 116px;
+  height: 92px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--wl-color-border);
+  background-color: var(--wl-color-background-weak);
+}
+
+.cover::before,
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cover span {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  z-index: 2;
+  color: var(--wl-color-text-weak);
+  font-size: 10px;
+}
+
+.grid::before {
+  background-image:
+    linear-gradient(var(--wl-color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--wl-color-border) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+.grid::after {
+  inset: 22px;
+  border: 1px solid var(--wl-color-text-strong);
+  background: rgb(255 255 255 / 68%);
+  backdrop-filter: blur(6px);
+}
+
+.signal::before {
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0 7px,
+    var(--wl-color-text-weaker) 7px 8px
+  );
+  clip-path: polygon(
+    0 72%,
+    10% 52%,
+    20% 70%,
+    30% 29%,
+    40% 56%,
+    50% 20%,
+    60% 46%,
+    70% 14%,
+    80% 40%,
+    90% 24%,
+    100% 58%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.type::before {
+  content: 'Aa\A 文章\A 01';
+  padding: 13px;
+  color: var(--wl-color-text-strong);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.window::before {
+  inset: 13px;
+  border: 1px solid var(--wl-color-border);
+  background: rgb(255 255 255 / 64%);
+  box-shadow: 7px 7px 0 var(--wl-color-text-weaker);
+}
+
+.window::after {
+  inset: 23px 30px 42px 23px;
+  border-top: 2px solid var(--wl-color-text-strong);
+  border-bottom: 1px solid var(--wl-color-border);
+}
+
+.stack::before {
+  inset: 17px 29px 31px 17px;
+  border: 1px solid var(--wl-color-border);
+  box-shadow:
+    6px 6px 0 var(--wl-color-background),
+    6px 6px 0 1px var(--wl-color-border),
+    12px 12px 0 var(--wl-color-background),
+    12px 12px 0 1px var(--wl-color-border);
+}
+
+.content {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--wl-color-text-weak);
+  font-size: 11px;
+}
+
+.meta > *:not(:last-child)::after {
+  content: '·';
+  margin-left: 8px;
+  color: var(--wl-color-text-weaker);
+}
+
+.meta strong {
+  color: var(--wl-color-text-strong);
+  font-weight: 600;
+}
+
+.article h2 {
+  margin: 0 0 10px;
+  color: var(--wl-color-text-strong);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  line-height: 1.45;
+}
+
+.article p {
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--wl-color-text);
+  font-size: 13px;
+  line-height: 1.75;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.readMore {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--wl-color-text-weak);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.card:hover .readMore,
+.card:hover h2 {
+  color: var(--wl-color-text-strong);
+}
+
+@media (max-width: 60rem) {
+  .article {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .article {
+    min-height: 220px;
+    gap: 18px;
+  }
+
+  .cover {
+    width: 96px;
+    height: 78px;
+  }
+
+  .article h2 {
+    font-size: 16px;
+  }
+
+  .article p {
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (max-width: 22rem) {
+  .article {
+    padding: 20px;
+  }
+
+  .cover {
+    display: none;
+  }
+}
