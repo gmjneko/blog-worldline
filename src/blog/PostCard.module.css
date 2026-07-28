@@ -23,7 +23,6 @@
 }
 
 .cover {
-  position: relative;
   width: 116px;
   height: 92px;
   flex: 0 0 auto;
@@ -32,90 +31,11 @@
   background-color: var(--wl-color-background-weak);
 }
 
-.cover::before,
-.cover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-}
-
-.cover span {
-  position: absolute;
-  right: 8px;
-  bottom: 7px;
-  z-index: 2;
-  color: var(--wl-color-text-weak);
-  font-size: 10px;
-}
-
-.grid::before {
-  background-image:
-    linear-gradient(var(--wl-color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--wl-color-border) 1px, transparent 1px);
-  background-size: 12px 12px;
-}
-
-.grid::after {
-  inset: 22px;
-  border: 1px solid var(--wl-color-text-strong);
-  background: rgb(255 255 255 / 68%);
-  backdrop-filter: blur(6px);
-}
-
-.signal::before {
-  background: repeating-linear-gradient(
-    to right,
-    transparent 0 7px,
-    var(--wl-color-text-weaker) 7px 8px
-  );
-  clip-path: polygon(
-    0 72%,
-    10% 52%,
-    20% 70%,
-    30% 29%,
-    40% 56%,
-    50% 20%,
-    60% 46%,
-    70% 14%,
-    80% 40%,
-    90% 24%,
-    100% 58%,
-    100% 100%,
-    0 100%
-  );
-}
-
-.type::before {
-  content: 'Aa\A 文章\A 01';
-  padding: 13px;
-  color: var(--wl-color-text-strong);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.55;
-  white-space: pre;
-}
-
-.window::before {
-  inset: 13px;
-  border: 1px solid var(--wl-color-border);
-  background: rgb(255 255 255 / 64%);
-  box-shadow: 7px 7px 0 var(--wl-color-text-weaker);
-}
-
-.window::after {
-  inset: 23px 30px 42px 23px;
-  border-top: 2px solid var(--wl-color-text-strong);
-  border-bottom: 1px solid var(--wl-color-border);
-}
-
-.stack::before {
-  inset: 17px 29px 31px 17px;
-  border: 1px solid var(--wl-color-border);
-  box-shadow:
-    6px 6px 0 var(--wl-color-background),
-    6px 6px 0 1px var(--wl-color-border),
-    12px 12px 0 var(--wl-color-background),
-    12px 12px 0 1px var(--wl-color-border);
+.cover img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .content {

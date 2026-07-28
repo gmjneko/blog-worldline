@@ -1,4 +1,4 @@
-import type { BlogPost } from './posts'
+import type { BlogPost } from './content'
 import styles from './PostCard.module.css'
 
 export interface PostCardProps {
@@ -7,11 +7,18 @@ export interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   return (
-    <a className={styles.card} href={`#${post.slug}`}>
-      <article id={post.slug} className={styles.article}>
-        {post.cover && (
-          <div className={`${styles.cover} ${styles[post.cover]}`} aria-hidden="true">
-            <span>{post.category.slice(0, 2).toUpperCase()}</span>
+    <a className={styles.card} href={post.url}>
+      <article className={styles.article}>
+        {post.featuredImage && (
+          <div className={styles.cover}>
+            <img
+              src={post.featuredImage.src}
+              alt=""
+              style={{
+                objectPosition: post.featuredImage.position,
+                transform: `scale(${post.featuredImage.zoom})`,
+              }}
+            />
           </div>
         )}
 
@@ -19,15 +26,15 @@ export function PostCard({ post }: PostCardProps) {
           <div className={styles.meta}>
             {post.pinned && <strong>置顶</strong>}
             <time dateTime={post.date}>{post.date}</time>
-            <span>{post.category}</span>
+            <span>{post.categoryName}</span>
             <span>{post.readingTime}</span>
           </div>
 
           <h2>{post.title}</h2>
-          <p>{post.excerpt}</p>
+          <p>{post.description}</p>
 
           <span className={styles.readMore}>
-            READ NOTE
+            READ POST
             <span aria-hidden="true">↗</span>
           </span>
         </div>

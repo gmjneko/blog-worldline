@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="模糊窗口示意">
+  <defs><filter id="blur"><feGaussianBlur stdDeviation="12"/></filter></defs>
+  <rect width="800" height="600" fill="#eeece8"/>
+  <g stroke="#777" stroke-width="14" filter="url(#blur)" opacity=".65">
+    <path d="M80 150h640M80 250h510M80 350h600M80 450h450"/>
+  </g>
+  <rect x="175" y="110" width="450" height="380" fill="#ffffffb8" stroke="#333" stroke-width="4"/>
+  <path d="M240 215h320M240 290h240M240 365h285" stroke="#555" stroke-width="10"/>
+</svg>

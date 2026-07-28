@@ -738,7 +738,20 @@ interface TerminalPanelProps
 - 不要在一个页面重复使用多个大型 TerminalPanel。
 - 大量真实日志应使用虚拟滚动或专门日志组件。
 
-## 8. 样式工具
+## 8. 博客业务组件
+
+以下组件位于 `src/blog`，它们依赖具体内容模型，因此不属于通用 `src/ui` 组件库：
+
+| 组件 | 作用 |
+| --- | --- |
+| `CategoryFilter` | 根据自动生成的分类数据切换文章列表 |
+| `SearchBar` | 在当前分类中搜索标题、描述和分类名称 |
+| `PostCard` | 展示文章元信息、缩略图、标题和描述，并链接到详情页 |
+| `ArticlePage` | 使用 Markdown 渲染文章详情并解析文章目录中的相对图片 |
+
+文章和分类类型由 `src/blog/content.ts` 统一导出，原始数据来自构建期虚拟模块。内容目录规范见 `doc/content.md`。
+
+## 9. 样式工具
 
 ### `.wl-prose`
 
@@ -752,6 +765,7 @@ interface TerminalPanelProps
 - 标题颜色和字重。
 - 链接样式。
 - 行内代码和代码块样式。
+- 根据 Markdown 代码围栏语言进行语法高亮。
 - 引用块样式。
 - 移动端字号调整。
 
@@ -769,7 +783,7 @@ interface TerminalPanelProps
 
 正式博客开发时可以在 `.wl-prose` 基础上增加文章专属的表格、图片、脚注和标题锚点规则。
 
-## 9. 组合示例
+## 10. 组合示例
 
 ```tsx
 import {
