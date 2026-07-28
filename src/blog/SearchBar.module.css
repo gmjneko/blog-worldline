@@ -42,6 +42,11 @@
   box-shadow: inset 0 0 0 1px var(--wl-color-text-strong);
 }
 
+.inputWrap input:focus-visible {
+  outline: 0;
+  outline-offset: 0;
+}
+
 .form > button {
   min-width: 78px;
   padding: 0 18px;

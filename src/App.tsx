@@ -217,12 +217,6 @@ function PostDetail({ categorySlug, postSlug }: { categorySlug: string; postSlug
     <BlogLayout>
       <PageShell className="blog-main" contentClassName="blog-shell article-shell">
         <ArticlePage post={post} />
-        <SiteFooter
-          className="blog-footer"
-          brand="Meika’s Blog"
-          brandHref="/"
-          meta={<span>© 2026</span>}
-        />
       </PageShell>
     </BlogLayout>
   )
