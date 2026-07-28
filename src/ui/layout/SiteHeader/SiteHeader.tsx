@@ -14,6 +14,7 @@ export interface SiteHeaderProps {
   brand?: ReactNode
   brandHref?: string
   brandLabel?: string
+  brandLogoSrc?: string
   navigation?: NavigationItem[]
 }
 
@@ -22,12 +23,13 @@ export function SiteHeader({
   brand = 'worldline',
   brandHref = '#top',
   brandLabel = '首页',
+  brandLogoSrc,
   navigation = [],
 }: SiteHeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Wordmark href={brandHref} aria-label={brandLabel}>
+        <Wordmark href={brandHref} aria-label={brandLabel} logoSrc={brandLogoSrc}>
           {brand}
         </Wordmark>
 

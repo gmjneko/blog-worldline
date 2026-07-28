@@ -1,13 +1,24 @@
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--wl-color-text-strong);
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
 }
 
+.logo {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--wl-color-border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .medium {
-  font-size: 26px;
-  letter-spacing: -2.2px;
+  font-size: 18px;
+  letter-spacing: -0.8px;
 }
 
 .small {
@@ -17,6 +28,6 @@
 
 @media (max-width: 40rem) {
   .medium {
-    font-size: 24px;
+    font-size: 17px;
   }
 }

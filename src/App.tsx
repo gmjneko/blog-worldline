@@ -72,6 +72,7 @@ function BlogLayout({ children }: { children: React.ReactNode }) {
         brand="Meika’s Blog"
         brandHref="/"
         brandLabel="Meika’s Blog 首页"
+        brandLogoSrc="/atri.png"
         navigation={navigation}
       />
 
