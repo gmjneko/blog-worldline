@@ -8,6 +8,7 @@ export interface NavigationItem {
   disabled?: boolean
   href: string
   label: ReactNode
+  external?: boolean
 }
 
 export interface SiteHeaderProps {
@@ -51,6 +52,8 @@ export function SiteHeader({
                 key={item.href}
                 href={item.href}
                 aria-current={item.active ? 'page' : undefined}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noreferrer' : undefined}
               >
                 {item.label}
               </a>
@@ -84,6 +87,8 @@ export function SiteHeader({
                   key={item.href}
                   href={item.href}
                   aria-current={item.active ? 'page' : undefined}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noreferrer' : undefined}
                 >
                   {item.label}
                 </a>

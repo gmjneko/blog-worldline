@@ -64,6 +64,7 @@ function getNavigation(activeSection: NavigationSection) {
     { href: '/cabin', label: '小屋', disabled: true },
     { href: '/friends', label: '友链', disabled: true },
     { href: '/about', label: '关于我', active: activeSection === 'about' },
+    { href: 'https://github.com/gmjneko', label: 'GitHub', external: true },
   ]
 }
 
