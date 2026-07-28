@@ -1,17 +1,3 @@
-import highlight from 'highlight.js/lib/core'
-import bash from 'highlight.js/lib/languages/bash'
-import css from 'highlight.js/lib/languages/css'
-import go from 'highlight.js/lib/languages/go'
-import java from 'highlight.js/lib/languages/java'
-import javascript from 'highlight.js/lib/languages/javascript'
-import json from 'highlight.js/lib/languages/json'
-import kotlin from 'highlight.js/lib/languages/kotlin'
-import markdown from 'highlight.js/lib/languages/markdown'
-import python from 'highlight.js/lib/languages/python'
-import rust from 'highlight.js/lib/languages/rust'
-import typescript from 'highlight.js/lib/languages/typescript'
-import xml from 'highlight.js/lib/languages/xml'
-import yaml from 'highlight.js/lib/languages/yaml'
 import {
   isValidElement,
   useEffect,
@@ -28,20 +14,6 @@ import styles from './ArticlePage.module.css'
 export interface ArticlePageProps {
   post: BlogPost
 }
-
-highlight.registerLanguage('bash', bash)
-highlight.registerLanguage('css', css)
-highlight.registerLanguage('go', go)
-highlight.registerLanguage('java', java)
-highlight.registerLanguage('javascript', javascript)
-highlight.registerLanguage('json', json)
-highlight.registerLanguage('kotlin', kotlin)
-highlight.registerLanguage('markdown', markdown)
-highlight.registerLanguage('python', python)
-highlight.registerLanguage('rust', rust)
-highlight.registerLanguage('typescript', typescript)
-highlight.registerLanguage('xml', xml)
-highlight.registerLanguage('yaml', yaml)
 
 const languageAliases: Record<string, string> = {
   html: 'xml',
@@ -207,25 +179,21 @@ function CodeFrame({ children }: { children?: ReactNode }) {
 function CodeBlock({
   children,
   className,
+  highlightedHtml,
 }: {
   children?: ReactNode
   className?: string
+  highlightedHtml?: string
 }) {
   const languageName = getLanguageName(className)
-  if (!languageName) return <code className={className}>{children}</code>
-
-  const language = languageAliases[languageName] ?? languageName
-  if (!highlight.getLanguage(language)) {
+  if (!languageName || !highlightedHtml) {
     return <code className={className}>{children}</code>
   }
 
-  const source = String(children).replace(/\n$/, '')
-  const highlighted = highlight.highlight(source, { language }).value
-
   return (
     <code
-      className={`hljs ${className}`}
-      dangerouslySetInnerHTML={{ __html: highlighted }}
+      className={`shiki ${className}`}
+      dangerouslySetInnerHTML={{ __html: highlightedHtml }}
     />
   )
 }
@@ -315,7 +283,18 @@ export function ArticlePage({ post }: ArticlePageProps) {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              code: CodeBlock,
+              code: ({ children, className, node }) => (
+                <CodeBlock
+                  className={className}
+                  highlightedHtml={
+                    node?.position?.start.line
+                      ? post.codeHighlights[node.position.start.line]
+                      : undefined
+                  }
+                >
+                  {children}
+                </CodeBlock>
+              ),
               h2: ({ children }) => (
                 <h2 id={createHeadingId(textContent(children))}>{children}</h2>
               ),

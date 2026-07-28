@@ -334,68 +334,6 @@
   font-size: 13px;
 }
 
-.prose :global(.hljs) {
-  display: block;
-  color: #343230;
-  background: transparent;
-}
-
-.prose :global(.hljs-comment),
-.prose :global(.hljs-quote) {
-  color: #8b8780;
-  font-style: italic;
-}
-
-.prose :global(.hljs-keyword),
-.prose :global(.hljs-selector-tag),
-.prose :global(.hljs-literal),
-.prose :global(.hljs-doctag) {
-  color: #81506a;
-}
-
-.prose :global(.hljs-string),
-.prose :global(.hljs-regexp),
-.prose :global(.hljs-title),
-.prose :global(.hljs-section) {
-  color: #4f7059;
-}
-
-.prose :global(.hljs-number),
-.prose :global(.hljs-attribute),
-.prose :global(.hljs-variable),
-.prose :global(.hljs-template-variable) {
-  color: #956433;
-}
-
-.prose :global(.hljs-built_in),
-.prose :global(.hljs-type),
-.prose :global(.hljs-name),
-.prose :global(.hljs-selector-class),
-.prose :global(.hljs-selector-id) {
-  color: #526887;
-}
-
-.prose :global(.hljs-attr),
-.prose :global(.hljs-property),
-.prose :global(.hljs-selector-attr),
-.prose :global(.hljs-selector-pseudo) {
-  color: #765d3d;
-}
-
-.prose :global(.hljs-meta),
-.prose :global(.hljs-symbol),
-.prose :global(.hljs-bullet) {
-  color: #70618a;
-}
-
-.prose :global(.hljs-emphasis) {
-  font-style: italic;
-}
-
-.prose :global(.hljs-strong) {
-  font-weight: 700;
-}
-
 .prose table {
   width: 100%;
   margin: var(--prose-block-spacing) 0;

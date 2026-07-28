@@ -21,6 +21,7 @@ export interface BlogPost {
   assets: Record<string, string>
   categoryName: string
   categorySlug: string
+  codeHighlights: Record<number, string>
   content: string
   date: string
   description: string

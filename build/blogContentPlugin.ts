@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import type { Plugin } from 'vite'
 import { normalizePath } from 'vite'
+import { createHighlighter, type BundledLanguage } from 'shiki'
 import { parse as parseYaml } from 'yaml'
 
 const virtualModuleId = 'virtual:blog-content'
@@ -15,6 +16,54 @@ const imageExtensions = new Set([
   '.svg',
   '.webp',
 ])
+const shikiTheme = 'vitesse-light'
+const shikiLanguages = [
+  'bash',
+  'css',
+  'go',
+  'html',
+  'java',
+  'javascript',
+  'json',
+  'jsx',
+  'kotlin',
+  'markdown',
+  'python',
+  'rust',
+  'tsx',
+  'typescript',
+  'xml',
+  'yaml',
+] satisfies BundledLanguage[]
+const shikiLanguageAliases: Record<string, BundledLanguage> = {
+  bash: 'bash',
+  css: 'css',
+  go: 'go',
+  golang: 'go',
+  html: 'html',
+  java: 'java',
+  javascript: 'javascript',
+  js: 'javascript',
+  json: 'json',
+  jsx: 'jsx',
+  kotlin: 'kotlin',
+  markdown: 'markdown',
+  md: 'markdown',
+  python: 'python',
+  py: 'python',
+  rs: 'rust',
+  rust: 'rust',
+  sh: 'bash',
+  shell: 'bash',
+  ts: 'typescript',
+  tsx: 'tsx',
+  typescript: 'typescript',
+  xml: 'xml',
+  yaml: 'yaml',
+  yml: 'yaml',
+}
+
+let codeHighlighter: ReturnType<typeof createHighlighter> | undefined
 
 interface BlogContentPluginOptions {
   includeDrafts?: boolean
@@ -39,6 +88,7 @@ interface PostRecord {
   assets: Map<string, string>
   categoryName: string
   categorySlug: string
+  codeHighlights: Map<number, string>
   content: string
   date: string
   description: string
@@ -54,6 +104,12 @@ interface PostRecord {
 interface ParsedFrontMatter {
   attributes: Record<string, unknown>
   body: string
+}
+
+interface MarkdownCodeFence {
+  language: string
+  source: string
+  startLine: number
 }
 
 function fail(filePath: string, message: string): never {
@@ -119,6 +175,96 @@ function calculateReadingTime(content: string) {
   const latinWords = withoutCode.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)?.length ?? 0
   const cjkCharacters = withoutCode.match(/[\u3400-\u9fff]/g)?.length ?? 0
   return `${Math.max(1, Math.ceil((latinWords + cjkCharacters) / 260))} min`
+}
+
+function getCodeHighlighter() {
+  codeHighlighter ??= createHighlighter({
+    langs: shikiLanguages,
+    themes: [shikiTheme],
+  })
+  return codeHighlighter
+}
+
+function extractCodeFences(markdown: string): MarkdownCodeFence[] {
+  const codeFences: MarkdownCodeFence[] = []
+  const lines = markdown.split('\n')
+  let currentFence:
+    | {
+        language: string
+        marker: string
+        sourceLines: string[]
+        startLine: number
+      }
+    | undefined
+
+  for (const [index, line] of lines.entries()) {
+    if (!currentFence) {
+      const openingFence = /^(?: {0,3})(`{3,}|~{3,})([^\r\n]*)$/.exec(line)
+      if (!openingFence) continue
+
+      const language = openingFence[2].trim().split(/\s+/, 1)[0]?.toLowerCase()
+      if (!language) continue
+
+      currentFence = {
+        language,
+        marker: openingFence[1],
+        sourceLines: [],
+        startLine: index + 1,
+      }
+      continue
+    }
+
+    const markerCharacter = currentFence.marker[0]
+    const closingFence = new RegExp(
+      `^ {0,3}${markerCharacter}{${currentFence.marker.length},}\\s*$`,
+    )
+    if (closingFence.test(line)) {
+      codeFences.push({
+        language: currentFence.language,
+        source: currentFence.sourceLines.join('\n'),
+        startLine: currentFence.startLine,
+      })
+      currentFence = undefined
+      continue
+    }
+
+    currentFence.sourceLines.push(line)
+  }
+
+  return codeFences
+}
+
+function codeInnerHtml(highlightedHtml: string) {
+  const codeStart = highlightedHtml.indexOf('<code>')
+  const codeEnd = highlightedHtml.lastIndexOf('</code>')
+  if (codeStart === -1 || codeEnd === -1) return undefined
+  return highlightedHtml.slice(codeStart + '<code>'.length, codeEnd)
+}
+
+async function highlightCodeFences(markdown: string, filePath: string) {
+  const codeFences = extractCodeFences(markdown)
+  const highlights = new Map<number, string>()
+  if (codeFences.length === 0) return highlights
+
+  const highlighter = await getCodeHighlighter()
+  for (const codeFence of codeFences) {
+    const language = shikiLanguageAliases[codeFence.language]
+    if (!language) continue
+
+    try {
+      const highlightedHtml = highlighter.codeToHtml(codeFence.source, {
+        lang: language,
+        theme: shikiTheme,
+      })
+      const innerHtml = codeInnerHtml(highlightedHtml)
+      if (innerHtml) highlights.set(codeFence.startLine, innerHtml)
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error)
+      fail(filePath, `Shiki 无法高亮 ${codeFence.language} 代码块：${reason}`)
+    }
+  }
+
+  return highlights
 }
 
 async function listDirectories(directory: string) {
@@ -268,6 +414,7 @@ async function readPost(
       assets,
       categoryName: category.name,
       categorySlug: category.slug,
+      codeHighlights: await highlightCodeFences(body, markdownPath),
       content: body,
       date,
       description,
@@ -346,10 +493,15 @@ async function createVirtualModule(
       ([relativePath, assetPath]) =>
         `${JSON.stringify(relativePath)}: ${assetVariables.get(assetPath)}`,
     )
+    const codeHighlights = [...post.codeHighlights].map(
+      ([line, highlightedHtml]) =>
+        `${JSON.stringify(line)}: ${JSON.stringify(highlightedHtml)}`,
+    )
 
     return `{
       categoryName: ${JSON.stringify(post.categoryName)},
       categorySlug: ${JSON.stringify(post.categorySlug)},
+      codeHighlights: { ${codeHighlights.join(', ')} },
       content: ${JSON.stringify(post.content)},
       date: ${JSON.stringify(post.date)},
       description: ${JSON.stringify(post.description)},
