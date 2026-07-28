@@ -254,7 +254,7 @@
   }
 
   .portrait {
-    width: min(260px, 82%);
+    display: none;
   }
 
   .prose {
