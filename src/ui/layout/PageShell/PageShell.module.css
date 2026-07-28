@@ -1,0 +1,27 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background: var(--wl-color-background);
+}
+
+.shell {
+  width: min(var(--wl-shell-width), 100%);
+  margin: 0 auto;
+  border-right: 1px solid var(--wl-color-border);
+  border-bottom: 1px solid var(--wl-color-border);
+  border-left: 1px solid var(--wl-color-border);
+  background: var(--wl-color-background);
+}
+
+@media (max-width: 65rem) {
+  .shell {
+    border-right: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding-bottom: 0;
+  }
+}

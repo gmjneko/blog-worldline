@@ -1,0 +1,22 @@
+.wordmark {
+  color: var(--wl-color-text-strong);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.medium {
+  font-size: 26px;
+  letter-spacing: -2.2px;
+}
+
+.small {
+  font-size: 23px;
+  letter-spacing: -1.9px;
+}
+
+@media (max-width: 40rem) {
+  .medium {
+    font-size: 24px;
+  }
+}

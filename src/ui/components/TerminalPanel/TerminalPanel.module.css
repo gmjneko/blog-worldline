@@ -1,0 +1,190 @@
+.section {
+  border-top: 1px solid var(--wl-color-border);
+  background: #0e0e0f;
+}
+
+.window {
+  min-height: 540px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  color: #d2d2d2;
+  background:
+    linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px) 0 0 / 100% 28px,
+    #0e0e0f;
+}
+
+.bar,
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #797979;
+  font-size: 12px;
+}
+
+.bar {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid #292929;
+  background: #151516;
+}
+
+.body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  border-right: 1px solid #292929;
+  border-left: 1px solid #292929;
+}
+
+.main {
+  padding: 40px 32px;
+  border-right: 1px solid #292929;
+}
+
+.main p {
+  margin: 0;
+}
+
+.prompt {
+  padding: 10px 12px;
+  color: #f0f0f0;
+  background: #181819;
+}
+
+.prompt span {
+  margin-right: 10px;
+  color: #9db7ff;
+}
+
+.muted {
+  padding: 18px 12px 26px;
+  color: #777;
+  font-size: 13px;
+}
+
+.task {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  border-top: 1px solid #242425;
+  color: #8f8f8f;
+  font-size: 13px;
+}
+
+.task strong,
+.task small {
+  display: block;
+}
+
+.task strong {
+  margin-bottom: 3px;
+  color: #c8c8c8;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.task small {
+  color: #626262;
+  font-size: 12px;
+}
+
+.activeTask {
+  border-left: 3px solid #8ca8ff;
+  color: #8ca8ff;
+  background: #1b1b1c;
+}
+
+.aside {
+  padding: 40px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  color: #777;
+  font-size: 12px;
+}
+
+.contextGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contextGroup p {
+  margin: 0 0 2px;
+  color: #c9c9c9;
+  font-weight: 600;
+}
+
+.contextGroup span:first-of-type {
+  color: #eee;
+}
+
+.status {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #292929;
+  background: #151516;
+}
+
+.status span:first-child {
+  color: #8ca8ff;
+}
+
+@media (max-width: 60rem) {
+  .window {
+    min-height: 440px;
+    padding: 16px;
+  }
+
+  .main {
+    padding: 32px 20px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .window {
+    min-height: 360px;
+    padding: 0;
+  }
+
+  .bar,
+  .status {
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .body {
+    display: block;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .main {
+    min-height: 292px;
+    padding: 24px;
+    border-right: 0;
+  }
+
+  .aside {
+    display: none;
+  }
+
+  .muted {
+    padding-bottom: 18px;
+  }
+
+  .status span:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 24rem) {
+  .task small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

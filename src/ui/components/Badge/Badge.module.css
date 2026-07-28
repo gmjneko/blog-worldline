@@ -1,0 +1,18 @@
+.badge {
+  width: fit-content;
+  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.strong {
+  color: var(--wl-color-background);
+  background: var(--wl-color-background-strong);
+}
+
+.soft {
+  color: var(--wl-color-text-strong);
+  background: var(--wl-color-interactive-soft);
+}

@@ -1,0 +1,55 @@
+.button {
+  min-height: 40px;
+  padding: 8px 12px 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  border: 1px solid var(--wl-color-background-strong);
+  color: var(--wl-color-background);
+  background: var(--wl-color-background-strong);
+}
+
+.primary:hover {
+  border-color: var(--wl-color-background-strong-hover);
+  background: var(--wl-color-background-strong-hover);
+}
+
+.secondary {
+  border: 1px solid var(--wl-color-border);
+  color: var(--wl-color-text-strong);
+  background: var(--wl-color-background);
+}
+
+.secondary:hover {
+  background: var(--wl-color-background-weak);
+}
+
+.ghost {
+  padding-right: 8px;
+  padding-left: 8px;
+  border: 1px solid transparent;
+  color: var(--wl-color-text-strong);
+  background: transparent;
+}
+
+.ghost:hover {
+  border-bottom-color: var(--wl-color-text-strong);
+  border-radius: 0;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-width: 1.4;
+}

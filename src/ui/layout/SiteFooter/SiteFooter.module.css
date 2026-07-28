@@ -1,0 +1,31 @@
+.footer {
+  min-height: 89px;
+  padding: 0 var(--wl-page-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid var(--wl-color-border);
+}
+
+.meta {
+  display: flex;
+  gap: 28px;
+  color: var(--wl-color-text-weak);
+  font-size: 12px;
+}
+
+@media (max-width: 40rem) {
+  .footer {
+    min-height: 128px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

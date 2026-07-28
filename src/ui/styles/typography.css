@@ -1,0 +1,56 @@
+.wl-prose {
+  color: var(--wl-color-text);
+  font-size: 16px;
+  line-height: 2;
+}
+
+.wl-prose h1,
+.wl-prose h2,
+.wl-prose h3,
+.wl-prose h4 {
+  color: var(--wl-color-text-strong);
+  font-weight: 700;
+}
+
+.wl-prose a {
+  color: var(--wl-color-text-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.wl-prose code {
+  padding: 2px 5px;
+  border: 1px solid var(--wl-color-border);
+  border-radius: var(--wl-radius-sm);
+  background: var(--wl-color-background-weak);
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+.wl-prose pre {
+  overflow-x: auto;
+  padding: var(--wl-space-6);
+  border: 1px solid var(--wl-color-border);
+  border-radius: var(--wl-radius-md);
+  background: var(--wl-color-background-weak);
+}
+
+.wl-prose pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.wl-prose blockquote {
+  margin-left: 0;
+  padding-left: var(--wl-space-6);
+  border-left: 2px solid var(--wl-color-text-strong);
+  color: var(--wl-color-text-weak);
+}
+
+@media (max-width: 60rem) {
+  .wl-prose {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+}

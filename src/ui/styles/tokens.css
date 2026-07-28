@@ -1,0 +1,61 @@
+:root {
+  --wl-color-background: hsl(0 20% 99%);
+  --wl-color-background-weak: hsl(0 8% 97%);
+  --wl-color-background-strong: hsl(0 5% 12%);
+  --wl-color-background-strong-hover: hsl(0 5% 18%);
+  --wl-color-interactive-soft: hsl(62 84% 88%);
+  --wl-color-text: hsl(0 1% 39%);
+  --wl-color-text-strong: hsl(0 5% 12%);
+  --wl-color-text-weak: hsl(0 1% 60%);
+  --wl-color-text-weaker: hsl(30 2% 81%);
+  --wl-color-border: hsl(0 100% 3% / 12%);
+
+  --wl-font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas,
+    'Liberation Mono', 'Noto Sans Mono CJK SC', 'Sarasa Mono SC', monospace;
+
+  --wl-shell-width: 1080px;
+  --wl-header-height: 80px;
+  --wl-page-padding: 80px;
+  --wl-section-padding-y: 64px;
+  --wl-hero-padding-y: 96px;
+
+  --wl-space-1: 4px;
+  --wl-space-2: 8px;
+  --wl-space-3: 12px;
+  --wl-space-4: 16px;
+  --wl-space-5: 20px;
+  --wl-space-6: 24px;
+  --wl-space-8: 32px;
+  --wl-space-10: 40px;
+  --wl-space-12: 48px;
+  --wl-space-16: 64px;
+
+  --wl-radius-sm: 3px;
+  --wl-radius-md: 5px;
+  --wl-radius-lg: 8px;
+
+  --wl-duration-fast: 160ms;
+  --wl-ease-standard: ease;
+}
+
+@media (max-width: 60rem) {
+  :root {
+    --wl-page-padding: 24px;
+    --wl-section-padding-y: 48px;
+    --wl-hero-padding-y: 48px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wl-color-background: hsl(0 9% 7%);
+    --wl-color-background-weak: hsl(0 6% 10%);
+    --wl-color-background-strong: hsl(0 20% 96%);
+    --wl-color-background-strong-hover: hsl(0 10% 88%);
+    --wl-color-text: hsl(0 3% 69%);
+    --wl-color-text-strong: hsl(0 20% 96%);
+    --wl-color-text-weak: hsl(0 2% 56%);
+    --wl-color-text-weaker: hsl(0 2% 31%);
+    --wl-color-border: hsl(0 20% 96% / 14%);
+  }
+}

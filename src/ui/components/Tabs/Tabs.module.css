@@ -1,0 +1,47 @@
+.tabs {
+  overflow: hidden;
+  border: 1px solid var(--wl-color-border);
+  border-radius: 6px;
+  background: var(--wl-color-background-weak);
+}
+
+.tabList {
+  min-height: 51px;
+  padding: 0 20px;
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--wl-color-border);
+}
+
+.tabList button {
+  min-width: 0;
+  padding: 16px 0 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--wl-color-text-weak);
+  background: transparent;
+  cursor: pointer;
+}
+
+.tabList button:hover {
+  color: var(--wl-color-text-strong);
+}
+
+.tabList button[aria-selected='true'] {
+  color: var(--wl-color-text-strong);
+  border-bottom-color: var(--wl-color-text-strong);
+}
+
+@media (max-width: 60rem) {
+  .tabList {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 24rem) {
+  .tabList {
+    gap: 24px;
+  }
+}

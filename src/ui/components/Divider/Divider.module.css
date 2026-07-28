@@ -1,0 +1,17 @@
+.divider {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--wl-color-border);
+}
+
+.none {
+  margin: 0;
+}
+
+.medium {
+  margin: var(--wl-space-8) 0;
+}
+
+.large {
+  margin: var(--wl-space-16) 0;
+}

@@ -1,0 +1,112 @@
+.header {
+  position: relative;
+  z-index: 10;
+  height: var(--wl-header-height);
+  padding: 0 var(--wl-page-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--wl-color-border);
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navigationLink {
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  color: var(--wl-color-text-strong);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.navigationLink:hover {
+  border-color: currentColor;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 60rem) {
+  .desktopNav {
+    gap: 22px;
+  }
+
+  .navigationLink {
+    display: none;
+  }
+}
+
+@media (max-width: 40rem) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: block;
+  }
+
+  .mobileMenu summary {
+    width: 32px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobileMenu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobileMenu summary span {
+    width: 14px;
+    height: 1px;
+    background: var(--wl-color-text-strong);
+    transition: transform var(--wl-duration-fast) var(--wl-ease-standard);
+  }
+
+  .mobileMenu summary span:last-child {
+    width: 9px;
+  }
+
+  .mobileMenu[open] summary span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  .mobileMenu[open] summary span:last-child {
+    width: 14px;
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .mobileMenu nav {
+    position: absolute;
+    top: calc(var(--wl-header-height) - 1px);
+    right: 0;
+    left: 0;
+    padding: 16px var(--wl-page-padding) 24px;
+    display: grid;
+    border-bottom: 1px solid var(--wl-color-border);
+    background: var(--wl-color-background);
+  }
+
+  .mobileMenu nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--wl-color-border);
+    color: var(--wl-color-text-strong);
+    text-decoration: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu summary span {
+    transition: none;
+  }
+}

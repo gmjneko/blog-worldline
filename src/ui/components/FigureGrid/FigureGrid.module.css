@@ -1,0 +1,108 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.grid figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.plot {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.lines {
+  background: repeating-linear-gradient(
+    117deg,
+    transparent 0 8px,
+    var(--wl-color-text-weaker) 8px 9px
+  );
+  clip-path: polygon(
+    0 100%,
+    10% 96%,
+    24% 86%,
+    38% 66%,
+    50% 36%,
+    64% 16%,
+    78% 7%,
+    100% 0,
+    100% 100%
+  );
+}
+
+.dots {
+  background-image: radial-gradient(
+    var(--wl-color-text-weaker) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 13px 13px;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 18%,
+    #000 80%,
+    transparent
+  );
+}
+
+.bars {
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0 11px,
+    var(--wl-color-text-weaker) 11px 12px
+  );
+  clip-path: polygon(
+    0 34%,
+    8% 17%,
+    16% 58%,
+    25% 26%,
+    34% 9%,
+    43% 44%,
+    52% 20%,
+    61% 55%,
+    70% 31%,
+    79% 8%,
+    88% 48%,
+    100% 24%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.grid figcaption {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  color: var(--wl-color-text-weak);
+  font-size: 13px;
+}
+
+.grid figcaption strong {
+  color: var(--wl-color-text-strong);
+  font-weight: 600;
+}
+
+@media (max-width: 60rem) {
+  .grid {
+    gap: 24px;
+  }
+
+  .plot {
+    height: 190px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .plot {
+    height: 200px;
+  }
+}
