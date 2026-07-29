@@ -26,6 +26,17 @@ export function BlogIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function DirectoryIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>
+      <rect x="2" y="2" width="4.5" height="4.5" />
+      <rect x="9.5" y="2" width="4.5" height="4.5" />
+      <rect x="2" y="9.5" width="4.5" height="4.5" />
+      <path d="M9.5 11.75H14M11.75 9.5V14" />
+    </svg>
+  )
+}
+
 export function CabinIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>

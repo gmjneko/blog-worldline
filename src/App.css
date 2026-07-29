@@ -136,6 +136,10 @@
   width: min(980px, 100%);
 }
 
+.navigation-shell {
+  width: min(1120px, 100%);
+}
+
 .not-found {
   min-height: calc(100vh - var(--wl-header-height));
   padding: 120px 0;

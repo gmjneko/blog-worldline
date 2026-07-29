@@ -9,10 +9,12 @@ import {
   findPost,
   posts,
 } from './blog'
+import { NavigationPage } from './navigation'
 import { PageShell, SiteFooter, SiteHeader } from './ui'
 import {
   BlogIcon,
   CabinIcon,
+  DirectoryIcon,
   FriendsIcon,
   GitHubIcon,
 } from './ui/icons'
@@ -62,7 +64,7 @@ function usePageMetadata(title: string, description: string) {
   }, [description, title])
 }
 
-type NavigationSection = 'blog' | 'about'
+type NavigationSection = 'blog' | 'navigation' | 'about'
 
 function getNavigation(activeSection: NavigationSection) {
   return [
@@ -71,6 +73,12 @@ function getNavigation(activeSection: NavigationSection) {
       icon: <BlogIcon />,
       label: '博客',
       active: activeSection === 'blog',
+    },
+    {
+      href: '/navigation',
+      icon: <DirectoryIcon />,
+      label: '导航站',
+      active: activeSection === 'navigation',
     },
     { href: '/cabin', icon: <CabinIcon />, label: '小屋', disabled: true },
     {
@@ -146,6 +154,33 @@ function About() {
   )
 }
 
+function Navigation() {
+  usePageMetadata(
+    'GMJneko | 导航站',
+    '常用 AI 工具、技术社区与开发资源导航。',
+  )
+
+  return (
+    <BlogLayout activeSection="navigation">
+      <PageShell className="blog-main" contentClassName="blog-shell navigation-shell">
+        <NavigationPage />
+
+        <SiteFooter
+          className="blog-footer"
+          brand="GMJneko’s Blog"
+          brandHref="/"
+          meta={
+            <>
+              <span>DIRECTORY / CURATED LINKS</span>
+              <span>© 2026</span>
+            </>
+          }
+        />
+      </PageShell>
+    </BlogLayout>
+  )
+}
+
 function BlogIndex({
   location,
   navigate,
@@ -197,6 +232,7 @@ function BlogIndex({
     <BlogLayout>
       <PageShell className="blog-main" contentClassName="blog-shell">
         <section className="blog-intro" aria-labelledby="blog-title">
+          <p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>
           <h1 id="blog-title">POSTS</h1>
 
           <CategoryFilter
@@ -296,6 +332,13 @@ function App() {
 
   if (location.pathname === '/about' || location.pathname === '/about/') {
     return <About />
+  }
+
+  if (
+    location.pathname === '/navigation' ||
+    location.pathname === '/navigation/'
+  ) {
+    return <Navigation />
   }
 
   if (location.pathname !== '/') {

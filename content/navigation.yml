@@ -1,0 +1,61 @@
+categories:
+  - name: AI 工具
+    description: 对话、检索与辅助创作工具。
+    sites:
+      - name: ChatGPT
+        description: OpenAI 的通用 AI 助手。
+        icon: /navigation-icons/ChatGPT.png
+        url: https://chatgpt.com/
+      - name: Claude
+        description: Anthropic 推出的 AI 助手。
+        icon: /navigation-icons/Claude.webp
+        url: https://claude.ai/
+      - name: Gemini
+        description: Google 的多模态 AI 助手。
+        icon: /navigation-icons/Gemini.webp
+        url: https://gemini.google.com/
+      - name: DeepSeek
+        description: DeepSeek 官方对话入口。
+        icon: /navigation-icons/DeepSeek.svg
+        url: https://chat.deepseek.com/
+      - name: Perplexity
+        description: 面向资料检索与答案溯源的 AI 搜索工具。
+        icon: /navigation-icons/Perplexity.png
+        url: https://www.perplexity.ai/
+  - name: 论坛与社区
+    description: 技术讨论、经验分享和日常交流。
+    sites:
+      - name: V2EX
+        description: 关于创造者和独立开发者的社区。
+        icon: /navigation-icons/V2EX.png
+        url: https://www.v2ex.com/
+      - name: Linux.do
+        description: 新的理想型社区。
+        icon: /navigation-icons/Linux.do.png
+        url: https://linux.do/
+      - name: X
+        description: 前身为 Twitter 的社交平台。
+        icon: /navigation-icons/X.webp
+        url: https://x.com/home
+  - name: 开发资源
+    description: 日常开发常用的文档、代码与兼容性资源。
+    sites:
+      - name: GitHub
+        description: 代码托管与开源协作平台。
+        icon: https://github.githubassets.com/favicons/favicon.svg
+        url: https://github.com/
+      - name: Hugging Face
+        description: AI 模型与数据集的开源社区。
+        icon: /navigation-icons/Hugging-Face.ico
+        url: https://huggingface.co/
+  - name: 工具站
+    description: 便捷的在线工具与服务。
+    sites:
+      - name: Excalidraw
+        description: 在线白板绘图工具。
+        icon: /navigation-icons/Excalidraw.png
+        url: https://excalidraw.com/
+      - name: Draw.io
+        description: 在线流程图绘制工具。
+        icon: /navigation-icons/Draw.io.ico
+        url: https://app.diagrams.net/
