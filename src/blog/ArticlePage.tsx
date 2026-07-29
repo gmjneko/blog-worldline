@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { BlogPost } from './content'
 import { resolvePostAsset } from './content'
+import { remarkImageSize } from './remarkImageSize'
 import styles from './ArticlePage.module.css'
 
 export interface ArticlePageProps {
@@ -281,7 +282,7 @@ export function ArticlePage({ post }: ArticlePageProps) {
 
         <div className={`wl-prose ${styles.prose}`}>
           <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
+            remarkPlugins={[remarkGfm, remarkImageSize]}
             components={{
               code: ({ children, className, node }) => (
                 <CodeBlock
@@ -301,11 +302,12 @@ export function ArticlePage({ post }: ArticlePageProps) {
               h3: ({ children }) => (
                 <h3 id={createHeadingId(textContent(children))}>{children}</h3>
               ),
-              img: ({ alt, src, title }) => (
+              img: ({ alt, src, style, title }) => (
                 <img
                   src={resolvePostAsset(post, src)}
                   alt={alt ?? ''}
                   title={title}
+                  style={style}
                   loading="lazy"
                 />
               ),
