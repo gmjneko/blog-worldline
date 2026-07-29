@@ -42,15 +42,6 @@ export function FriendsIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function AboutIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>
-      <circle cx="8" cy="5" r="2.25" />
-      <path d="M3.5 14a4.5 4.5 0 0 1 9 0" />
-    </svg>
-  )
-}
-
 export function GitHubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>

@@ -22,10 +22,15 @@ export interface SiteHeaderProps {
 }
 
 function NavigationItemContent({ item }: { item: NavigationItem }) {
+  const iconClassName =
+    typeof item.icon === 'string'
+      ? `${styles.navigationIcon} ${styles.navigationTextIcon}`
+      : styles.navigationIcon
+
   return (
     <span className={styles.navigationItemContent}>
       {item.icon && (
-        <span className={styles.navigationIcon} aria-hidden="true">
+        <span className={iconClassName} aria-hidden="true">
           {item.icon}
         </span>
       )}

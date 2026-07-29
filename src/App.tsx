@@ -11,7 +11,6 @@ import {
 } from './blog'
 import { PageShell, SiteFooter, SiteHeader } from './ui'
 import {
-  AboutIcon,
   BlogIcon,
   CabinIcon,
   FriendsIcon,
@@ -82,7 +81,7 @@ function getNavigation(activeSection: NavigationSection) {
     },
     {
       href: '/about',
-      icon: <AboutIcon />,
+      icon: '@',
       label: '关于我',
       active: activeSection === 'about',
     },
