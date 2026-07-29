@@ -133,6 +133,7 @@ interface PageShellProps extends HTMLAttributes<HTMLElement> {
 interface NavigationItem {
   active?: boolean
   href: string
+  icon?: ReactNode
   label: ReactNode
 }
 
@@ -150,7 +151,7 @@ interface SiteHeaderProps {
 - `brand`：品牌内容，默认为 `worldline`。
 - `brandHref`：品牌链接，默认为 `#top`。
 - `brandLabel`：品牌链接无障碍标签，默认为 `首页`。
-- `navigation`：导航项目列表，项目可通过 `active` 标记当前页面。
+- `navigation`：导航项目列表，项目可通过 `icon` 添加前置图标，并通过 `active` 标记当前页面。
 - `action`：桌面端右侧主操作，同时会出现在移动菜单底部。
 
 #### 示例
@@ -172,7 +173,7 @@ interface SiteHeaderProps {
 
 - 导航使用 `position: sticky` 常驻在视口顶部。
 - 半透明背景配合 `backdrop-filter: blur(16px)`，页面滚动时保持内容可辨识。
-- 当前页面链接通过 `aria-current="page"` 和底边线表达。
+- 当前页面链接通过 `aria-current="page"` 和深色反转样式表达。
 - `40rem` 以下隐藏桌面导航。
 - 移动菜单使用原生 `<details>` 和 `<summary>`。
 - 主操作使用 `Button` 的主按钮样式。

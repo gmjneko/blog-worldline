@@ -7,6 +7,7 @@ export interface NavigationItem {
   active?: boolean
   disabled?: boolean
   href: string
+  icon?: ReactNode
   label: ReactNode
   external?: boolean
 }
@@ -18,6 +19,19 @@ export interface SiteHeaderProps {
   brandLabel?: string
   brandLogoSrc?: string
   navigation?: NavigationItem[]
+}
+
+function NavigationItemContent({ item }: { item: NavigationItem }) {
+  return (
+    <span className={styles.navigationItemContent}>
+      {item.icon && (
+        <span className={styles.navigationIcon} aria-hidden="true">
+          {item.icon}
+        </span>
+      )}
+      <span>{item.label}</span>
+    </span>
+  )
 }
 
 export function SiteHeader({
@@ -44,7 +58,7 @@ export function SiteHeader({
                 aria-disabled="true"
                 title="暂未开放"
               >
-                {item.label}
+                <NavigationItemContent item={item} />
               </span>
             ) : (
               <a
@@ -55,7 +69,7 @@ export function SiteHeader({
                 target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noreferrer' : undefined}
               >
-                {item.label}
+                <NavigationItemContent item={item} />
               </a>
             ),
           )}
@@ -79,7 +93,7 @@ export function SiteHeader({
                   key={item.href}
                   aria-disabled="true"
                 >
-                  {item.label}
+                  <NavigationItemContent item={item} />
                   <small>COMING SOON</small>
                 </span>
               ) : (
@@ -90,7 +104,7 @@ export function SiteHeader({
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noreferrer' : undefined}
                 >
-                  {item.label}
+                  <NavigationItemContent item={item} />
                 </a>
               ),
             )}

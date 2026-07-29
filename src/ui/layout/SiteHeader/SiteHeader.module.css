@@ -27,33 +27,105 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 8px;
 }
 
 .navigationLink {
-  padding: 8px 0;
-  border-bottom: 1px solid transparent;
+  position: relative;
+  min-height: 34px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid transparent;
   color: var(--wl-color-text-strong);
   font-size: 15px;
   text-decoration: none;
+  transition:
+    color var(--wl-duration-fast) var(--wl-ease-standard),
+    background-color var(--wl-duration-fast) var(--wl-ease-standard),
+    border-color var(--wl-duration-fast) var(--wl-ease-standard),
+    box-shadow var(--wl-duration-fast) var(--wl-ease-standard);
 }
 
 .navigationLink:hover {
-  border-color: currentColor;
+  border-color: var(--wl-color-text-strong);
+  color: var(--wl-color-background);
+  background: var(--wl-color-text-strong);
+  box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
+}
+
+.navigationLink::after {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms var(--wl-ease-standard);
+}
+
+.navigationLink:active::after {
+  opacity: 0.12;
+  transition-duration: 0ms;
 }
 
 .navigationLink[aria-current='page'] {
-  border-color: currentColor;
-  font-weight: 600;
+  border-color: var(--wl-color-text-strong);
+  color: var(--wl-color-background);
+  background: var(--wl-color-text-strong);
+  box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
+  animation: navigation-selection-in 220ms var(--wl-ease-standard);
+}
+
+.navigationItemContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.navigationIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.navigationIcon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
 }
 
 .navigationLinkDisabled {
   color: var(--wl-color-text-weak);
   cursor: default;
+  transition: none;
 }
 
 .navigationLinkDisabled:hover {
   border-color: transparent;
+  color: var(--wl-color-text-weak);
+  background: transparent;
+  box-shadow: none;
+}
+
+.navigationLinkDisabled::after {
+  display: none;
+}
+
+@keyframes navigation-selection-in {
+  from {
+    opacity: 0.72;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .mobileMenu {
@@ -62,7 +134,12 @@
 
 @media (max-width: 60rem) {
   .desktopNav {
-    gap: 18px;
+    gap: 4px;
+  }
+
+  .navigationLink {
+    padding-right: 8px;
+    padding-left: 8px;
   }
 }
 
@@ -159,7 +236,12 @@
   }
 
   .mobileMenu nav a[aria-current='page'] {
-    font-weight: 700;
+    width: fit-content;
+    margin: 6px 0;
+    padding: 8px 11px;
+    border-color: var(--wl-color-text-strong);
+    color: var(--wl-color-background);
+    background: var(--wl-color-text-strong);
   }
 
   .mobileMenu nav .mobileAction {
@@ -170,6 +252,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .navigationLink {
+    transition: none;
+  }
+
+  .navigationLink[aria-current='page'] {
+    animation: none;
+  }
+
+  .navigationLink::after {
+    transition: none;
+  }
+
   .mobileMenu summary span {
     transition: none;
   }

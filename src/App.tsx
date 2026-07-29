@@ -10,6 +10,13 @@ import {
   posts,
 } from './blog'
 import { PageShell, SiteFooter, SiteHeader } from './ui'
+import {
+  AboutIcon,
+  BlogIcon,
+  CabinIcon,
+  FriendsIcon,
+  GitHubIcon,
+} from './ui/icons'
 import './App.css'
 
 interface BrowserLocation {
@@ -60,11 +67,31 @@ type NavigationSection = 'blog' | 'about'
 
 function getNavigation(activeSection: NavigationSection) {
   return [
-    { href: '/', label: '博客', active: activeSection === 'blog' },
-    { href: '/cabin', label: '小屋', disabled: true },
-    { href: '/friends', label: '友链', disabled: true },
-    { href: '/about', label: '关于我', active: activeSection === 'about' },
-    { href: 'https://github.com/gmjneko', label: 'GitHub', external: true },
+    {
+      href: '/',
+      icon: <BlogIcon />,
+      label: '博客',
+      active: activeSection === 'blog',
+    },
+    { href: '/cabin', icon: <CabinIcon />, label: '小屋', disabled: true },
+    {
+      href: '/friends',
+      icon: <FriendsIcon />,
+      label: '友链',
+      disabled: true,
+    },
+    {
+      href: '/about',
+      icon: <AboutIcon />,
+      label: '关于我',
+      active: activeSection === 'about',
+    },
+    {
+      href: 'https://github.com/gmjneko',
+      icon: <GitHubIcon />,
+      label: 'GitHub',
+      external: true,
+    },
   ]
 }
 
