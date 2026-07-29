@@ -1,9 +1,7 @@
 ---
-title: 记一次给 Spring AI 修 Bug 的全过程
+title: 记一次给 Spring AI 修 Bug
 published-at: 2026-05-24
-description: 给 Spring AI 流式接口非流式 Bug 的排查与修复实录。
-tags: [AI, Spring-AI, Java, 开源]
-draft: false
+description: Spring AI 流式接口非流式 Bug 的排查与修复实录。
 featured-image: ./images/og-spring.png
 ---
 
