@@ -6,6 +6,7 @@ featured-image: ./images/rhythm.svg
 featured-image-alt: 由不同高度竖线组成的写作节奏示意
 featured-image-position: center
 featured-image-zoom: 1
+draft: true
 ---
 
 我不再要求自己按固定周期发布文章。更可持续的方式，是让记录、整理和写作各自拥有不同的节奏。

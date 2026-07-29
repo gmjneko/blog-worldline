@@ -6,6 +6,7 @@ featured-image: ./images/blur.svg
 featured-image-alt: 半透明窗口覆盖在文字之上的效果示意
 featured-image-position: center
 featured-image-zoom: 1.12
+draft: true
 ---
 
 `backdrop-filter` 很适合常驻导航栏，因为它可以在保留页面上下文的同时维持文字可读性。

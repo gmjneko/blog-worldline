@@ -6,6 +6,7 @@ featured-image: ./images/cover.svg
 featured-image-alt: 多层窗口组成的组件系统示意
 featured-image-position: center
 featured-image-zoom: 1
+draft: true
 ---
 
 从原型中提取组件时，最容易犯的错误是看到重复的外观就立刻抽象。真正值得进入组件库的，应该是稳定的语义和行为。

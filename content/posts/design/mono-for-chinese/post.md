@@ -6,6 +6,7 @@ featured-image: ./images/type.svg
 featured-image-alt: 中文与英文字形的排版示意
 featured-image-position: center
 featured-image-zoom: 1.08
+draft: true
 ---
 
 等宽字体非常适合代码、日期和短标签，因为它能够创造明确的节奏。但中文正文天然接近方块结构，整页使用等宽字体可能让段落显得过于紧张。

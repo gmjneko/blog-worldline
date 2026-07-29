@@ -6,7 +6,8 @@ featured-image: ./images/cover.svg
 featured-image-alt: 由网格和白色内容框构成的抽象界面
 featured-image-position: center
 featured-image-zoom: 1
-pinned: true
+pinned: false
+draft: true
 ---
 
 阅读界面最重要的工作，不是证明设计师做了多少，而是让内容自然地抵达读者。
