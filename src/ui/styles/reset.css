@@ -53,8 +53,12 @@ select:focus-visible {
 }
 
 ::selection {
-  color: var(--wl-color-text-strong);
-  background: var(--wl-color-interactive-soft);
+  color: var(--wl-color-background);
+  background: color-mix(
+    in srgb,
+    var(--wl-color-text-strong) 96%,
+    var(--wl-color-background)
+  );
 }
 
 @media (prefers-color-scheme: dark) {
