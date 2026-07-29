@@ -31,10 +31,35 @@
   color: var(--wl-color-text-strong);
   background: rgb(255 255 255 / 54%);
   outline: 0;
+  transition:
+    border-color var(--wl-duration-fast) var(--wl-ease-standard),
+    box-shadow var(--wl-duration-fast) var(--wl-ease-standard);
 }
 
 .inputWrap input::placeholder {
   color: var(--wl-color-text-weak);
+}
+
+.inputWrap input::-webkit-search-cancel-button {
+  width: 14px;
+  height: 14px;
+  margin-left: 12px;
+  -webkit-appearance: none;
+  appearance: none;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 46%,
+      var(--wl-color-text-strong) 46% 54%,
+      transparent 54%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 46%,
+      var(--wl-color-text-strong) 46% 54%,
+      transparent 54%
+    );
+  cursor: pointer;
 }
 
 .inputWrap input:focus {
@@ -54,10 +79,26 @@
   color: var(--wl-color-text-strong);
   background: rgb(255 255 255 / 72%);
   cursor: pointer;
+  transition:
+    color var(--wl-duration-fast) var(--wl-ease-standard),
+    background-color var(--wl-duration-fast) var(--wl-ease-standard),
+    border-color var(--wl-duration-fast) var(--wl-ease-standard),
+    box-shadow var(--wl-duration-fast) var(--wl-ease-standard);
 }
 
 .form > button:hover {
-  background: var(--wl-color-background-weak);
+  border-color: var(--wl-color-text-strong);
+  color: var(--wl-color-background);
+  background: var(--wl-color-text-strong);
+  box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
+}
+
+.form > button:active {
+  border-color: var(--wl-color-text-strong);
+  color: var(--wl-color-background);
+  background: var(--wl-color-text-strong);
+  box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
+  transition-duration: 0ms;
 }
 
 .srOnly {
@@ -74,5 +115,12 @@
   .form > button {
     min-width: 70px;
     padding: 0 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inputWrap input,
+  .form > button {
+    transition: none;
   }
 }
