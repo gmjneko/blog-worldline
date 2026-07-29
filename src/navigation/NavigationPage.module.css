@@ -20,10 +20,19 @@
 .intro h1 {
   margin: 0;
   color: var(--wl-color-text-strong);
-  font-size: clamp(40px, 6vw, 64px);
+  font-size: clamp(36px, 5vw, 58px);
   font-weight: 700;
   letter-spacing: -0.07em;
-  line-height: 1;
+  line-height: 1.1;
+}
+
+.intro h1 span {
+  margin-top: 8px;
+  display: block;
+  color: var(--wl-color-text-weak);
+  font-size: 0.42em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .lead {

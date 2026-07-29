@@ -60,10 +60,19 @@
 .blog-intro h1 {
   margin: 0;
   color: var(--wl-color-text-strong);
-  font-size: 38px;
+  font-size: clamp(36px, 5vw, 58px);
   font-weight: 700;
   letter-spacing: -1.8px;
-  line-height: 1.2;
+  line-height: 1.1;
+}
+
+.blog-intro h1 span {
+  margin-top: 8px;
+  display: block;
+  color: var(--wl-color-text-weak);
+  font-size: 0.42em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .blog-search {
@@ -177,10 +186,6 @@
 
   .blog-intro {
     padding: 42px 0 24px;
-  }
-
-  .blog-intro h1 {
-    font-size: 32px;
   }
 
   .post-grid {

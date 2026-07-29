@@ -53,7 +53,9 @@ export function NavigationPage() {
       <section className={styles.intro} aria-labelledby="navigation-title">
         <div className={styles.introCopy}>
           <p className={styles.eyebrow}>DIRECTORY / CURATED LINKS</p>
-          <h1 id="navigation-title">导航站</h1>
+          <h1 id="navigation-title">
+            导航站 <span>/ Navigation</span>
+          </h1>
         </div>
 
         <dl className={styles.stats} aria-label="导航站统计">
