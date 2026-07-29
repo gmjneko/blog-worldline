@@ -198,7 +198,6 @@ function BlogIndex({
     <BlogLayout>
       <PageShell className="blog-main" contentClassName="blog-shell">
         <section className="blog-intro" aria-labelledby="blog-title">
-          <p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>
           <h1 id="blog-title">POSTS</h1>
 
           <CategoryFilter
