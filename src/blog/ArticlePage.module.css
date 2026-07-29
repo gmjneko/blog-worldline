@@ -1,8 +1,8 @@
 .layout {
-  width: min(1060px, 100%);
+  width: min(1100px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 760px) 260px;
+  grid-template-columns: minmax(0, 760px) 300px;
   align-items: start;
   gap: 40px;
 }
