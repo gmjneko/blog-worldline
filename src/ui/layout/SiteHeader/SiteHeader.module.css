@@ -224,7 +224,7 @@
 
   .mobileMenu nav > a,
   .mobileMenu nav > span {
-    padding: 12px 0;
+    padding: 12px;
     border-bottom: 1px solid var(--wl-color-border);
     color: var(--wl-color-text-strong);
     text-decoration: none;
@@ -248,9 +248,10 @@
   }
 
   .mobileMenu nav a[aria-current='page'] {
-    width: fit-content;
+    width: 100%;
+    box-sizing: border-box;
     margin: 6px 0;
-    padding: 8px 11px;
+    padding: 8px 12px;
     border-color: var(--wl-color-text-strong);
     color: var(--wl-color-background);
     background: var(--wl-color-text-strong);
