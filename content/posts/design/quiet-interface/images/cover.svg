@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="抽象网格界面">
-  <rect width="800" height="600" fill="#f4f3f1"/>
-  <g stroke="#d5d3cf" stroke-width="1">
-    <path d="M0 75h800M0 150h800M0 225h800M0 300h800M0 375h800M0 450h800M0 525h800"/>
-    <path d="M100 0v600M200 0v600M300 0v600M400 0v600M500 0v600M600 0v600M700 0v600"/>
-  </g>
-  <rect x="185" y="145" width="430" height="310" fill="#fff" stroke="#242322" stroke-width="4"/>
-  <path d="M245 230h310M245 285h250M245 340h280" stroke="#aaa7a2" stroke-width="12"/>
-</svg>
