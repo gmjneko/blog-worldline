@@ -10,7 +10,7 @@
 
 .label {
   flex: 0 0 auto;
-  color: var(--wl-color-text-weak);
+  color: var(--wl-color-text);
   font-size: 10px;
   letter-spacing: 0.1em;
 }
@@ -31,7 +31,7 @@
   align-items: center;
   overflow: hidden;
   border: 1px solid transparent;
-  color: var(--wl-color-text-weak);
+  color: var(--wl-color-text);
   text-decoration: none;
   transition:
     color var(--wl-duration-fast) var(--wl-ease-standard),
