@@ -16,15 +16,16 @@
 }
 
 .article {
-  min-height: 170px;
-  padding: 24px;
+  height: 150px;
+  padding: 0 24px;
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
 .cover {
-  width: 108px;
-  height: 84px;
+  width: 136px;
+  height: 102px;
   flex: 0 0 auto;
   overflow: hidden;
   border: 1px solid var(--wl-color-border);
@@ -91,15 +92,19 @@
 }
 
 @media (max-width: 40rem) {
+  .card {
+    border-right: 0;
+  }
+
   .article {
-    min-height: 160px;
-    padding: 20px;
+    height: 144px;
+    padding: 0 16px;
     gap: 16px;
   }
 
   .cover {
-    width: 88px;
-    height: 72px;
+    width: 112px;
+    height: 84px;
   }
 
   .article h2 {
@@ -111,7 +116,7 @@
   }
 }
 
-@media (max-width: 22rem) {
+@media (max-width: 23rem) {
   .cover {
     display: none;
   }

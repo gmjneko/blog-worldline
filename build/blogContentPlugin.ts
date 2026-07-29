@@ -1,5 +1,7 @@
-import { readdir, readFile, stat } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { mkdir, readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
+import sharp, { type Metadata } from 'sharp'
 import type { Plugin } from 'vite'
 import { normalizePath } from 'vite'
 import { createHighlighter, type BundledLanguage } from 'shiki'
@@ -7,6 +9,13 @@ import { parse as parseYaml } from 'yaml'
 
 const virtualModuleId = 'virtual:blog-content'
 const resolvedVirtualModuleId = `\0${virtualModuleId}`
+const automaticPreviewExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp'])
+const automaticPreviewHeight = 306
+const automaticPreviewMaxInputHeight = 900
+const automaticPreviewMaxInputPixels = 1_000_000
+const automaticPreviewMaxInputWidth = 1200
+const automaticPreviewVersion = 'v3'
+const automaticPreviewWidth = 408
 const imageExtensions = new Set([
   '.avif',
   '.gif',
@@ -81,6 +90,7 @@ interface FeaturedImageRecord {
   alt: string
   assetPath: string
   position: string
+  previewAssetPath?: string
   zoom: number
 }
 
@@ -296,6 +306,122 @@ async function listImages(directory: string): Promise<string[]> {
   return images.sort()
 }
 
+function parseObjectPosition(position: string) {
+  let x: number | undefined
+  let y: number | undefined
+
+  for (const token of position.trim().toLowerCase().split(/\s+/)) {
+    if (token === 'left') {
+      x = 0
+    } else if (token === 'right') {
+      x = 1
+    } else if (token === 'top') {
+      y = 0
+    } else if (token === 'bottom') {
+      y = 1
+    } else if (token === 'center') {
+      if (x === undefined) x = 0.5
+      else if (y === undefined) y = 0.5
+    } else if (/^-?\d+(?:\.\d+)?%$/.test(token)) {
+      const percentage = Math.min(1, Math.max(0, Number.parseFloat(token) / 100))
+      if (x === undefined) x = percentage
+      else if (y === undefined) y = percentage
+    }
+  }
+
+  return { x: x ?? 0.5, y: y ?? 0.5 }
+}
+
+function calculatePreviewCrop(width: number, height: number, position: string) {
+  const targetAspectRatio = automaticPreviewWidth / automaticPreviewHeight
+  const sourceAspectRatio = width / height
+  const focus = parseObjectPosition(position)
+
+  if (sourceAspectRatio > targetAspectRatio) {
+    const cropWidth = Math.min(width, Math.round(height * targetAspectRatio))
+    return {
+      height,
+      left: Math.round((width - cropWidth) * focus.x),
+      top: 0,
+      width: cropWidth,
+    }
+  }
+
+  const cropHeight = Math.min(height, Math.round(width / targetAspectRatio))
+  return {
+    height: cropHeight,
+    left: 0,
+    top: Math.round((height - cropHeight) * focus.y),
+    width,
+  }
+}
+
+async function createAutomaticPreview(
+  imagePath: string,
+  cacheDirectory: string,
+  position: string,
+) {
+  const extension = path.extname(imagePath).toLowerCase()
+  if (!automaticPreviewExtensions.has(extension)) return undefined
+
+  const source = await readFile(imagePath)
+  let metadata: Metadata
+
+  try {
+    metadata = await sharp(source).metadata()
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error)
+    fail(imagePath, `无法读取主图尺寸：${reason}`)
+  }
+
+  const width = metadata.autoOrient?.width ?? metadata.width
+  const height = metadata.autoOrient?.height ?? metadata.height
+  if (!width || !height) return undefined
+
+  const needsPreview =
+    width > automaticPreviewMaxInputWidth ||
+    height > automaticPreviewMaxInputHeight ||
+    width * height > automaticPreviewMaxInputPixels
+  if (!needsPreview) return undefined
+
+  const hash = createHash('sha256')
+    .update(automaticPreviewVersion)
+    .update(position)
+    .update(source)
+    .digest('hex')
+    .slice(0, 20)
+  const previewPath = path.join(cacheDirectory, `${hash}.jpg`)
+
+  try {
+    if ((await stat(previewPath)).isFile()) return previewPath
+  } catch {
+    // 缓存未命中时继续生成。
+  }
+
+  await mkdir(cacheDirectory, { recursive: true })
+
+  try {
+    const crop = calculatePreviewCrop(width, height, position)
+    await sharp(source)
+      .rotate()
+      .extract(crop)
+      .resize({
+        fit: 'fill',
+        height: automaticPreviewHeight,
+        kernel: sharp.kernel.lanczos3,
+        width: automaticPreviewWidth,
+      })
+      .flatten({ background: '#fff' })
+      .jpeg({ chromaSubsampling: '4:4:4', mozjpeg: true, quality: 92 })
+      .toFile(previewPath)
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error)
+    fail(imagePath, `无法生成卡片预览图：${reason}`)
+  }
+
+  return previewPath
+}
+
 async function readCategory(categoryDirectory: string, slug: string) {
   const configPath = path.join(categoryDirectory, 'category.yml')
   let source: string
@@ -327,6 +453,7 @@ async function readCategory(categoryDirectory: string, slug: string) {
 async function readPost(
   articleDirectory: string,
   category: CategoryRecord,
+  previewCacheDirectory: string,
 ): Promise<{ post: PostRecord; watchedFiles: string[] }> {
   const entries = await readdir(articleDirectory, { withFileTypes: true })
   const markdownFiles = entries.filter(
@@ -376,6 +503,15 @@ async function readPost(
   }
 
   const featuredImagePath = optionalString(attributes, 'featured-image', markdownPath)
+  const featuredImagePreviewPath = optionalString(
+    attributes,
+    'featured-image-preview',
+    markdownPath,
+  )
+  if (featuredImagePreviewPath && !featuredImagePath) {
+    fail(markdownPath, '字段 “featured-image-preview” 必须和 “featured-image” 一起使用。')
+  }
+
   let featuredImage: FeaturedImageRecord | undefined
   if (featuredImagePath) {
     if (!featuredImagePath.startsWith('./')) {
@@ -391,6 +527,30 @@ async function readPost(
     }
 
     const position = optionalString(attributes, 'featured-image-position', markdownPath) ?? 'center'
+    let previewAssetPath: string | undefined
+    if (featuredImagePreviewPath) {
+      if (!featuredImagePreviewPath.startsWith('./')) {
+        fail(
+          markdownPath,
+          '字段 “featured-image-preview” 必须使用以 ./ 开头的文章内相对路径。',
+        )
+      }
+
+      const normalizedPreviewImagePath = `./${normalizePath(
+        featuredImagePreviewPath.replace(/^\.\//, ''),
+      )}`
+      previewAssetPath = assets.get(normalizedPreviewImagePath)
+      if (!previewAssetPath) {
+        fail(markdownPath, `找不到预览缩略图 “${featuredImagePreviewPath}”。`)
+      }
+    } else {
+      previewAssetPath = await createAutomaticPreview(
+        assetPath,
+        previewCacheDirectory,
+        position,
+      )
+    }
+
     const zoomValue = attributes['featured-image-zoom'] ?? 1
     if (
       typeof zoomValue !== 'number' ||
@@ -405,6 +565,7 @@ async function readPost(
       alt: optionalString(attributes, 'featured-image-alt', markdownPath) ?? '',
       assetPath,
       position,
+      previewAssetPath,
       zoom: zoomValue,
     }
   }
@@ -433,6 +594,7 @@ async function readPost(
 async function createVirtualModule(
   contentRoot: string,
   includeDrafts: boolean,
+  previewCacheDirectory: string,
 ): Promise<{ code: string; watchedFiles: string[] }> {
   try {
     if (!(await stat(contentRoot)).isDirectory()) {
@@ -459,6 +621,7 @@ async function createVirtualModule(
       const { post, watchedFiles: postFiles } = await readPost(
         path.join(categoryDirectory, articleSlug),
         category,
+        previewCacheDirectory,
       )
       watchedFiles.push(...postFiles)
       if (includeDrafts || !post.draft) posts.push(post)
@@ -478,6 +641,11 @@ async function createVirtualModule(
         assetVariables.set(assetPath, `__blogAsset${assetVariables.size}`)
       }
     }
+
+    const previewAssetPath = post.featuredImage?.previewAssetPath
+    if (previewAssetPath && !assetVariables.has(previewAssetPath)) {
+      assetVariables.set(previewAssetPath, `__blogAsset${assetVariables.size}`)
+    }
   }
 
   const imports = [...assetVariables].map(
@@ -487,7 +655,7 @@ async function createVirtualModule(
 
   const postSource = posts.map((post) => {
     const featuredImage = post.featuredImage
-      ? `{ alt: ${JSON.stringify(post.featuredImage.alt)}, position: ${JSON.stringify(post.featuredImage.position)}, zoom: ${post.featuredImage.zoom}, src: ${assetVariables.get(post.featuredImage.assetPath)} }`
+      ? `{ alt: ${JSON.stringify(post.featuredImage.alt)}, position: ${JSON.stringify(post.featuredImage.position)}, previewSrc: ${post.featuredImage.previewAssetPath ? assetVariables.get(post.featuredImage.previewAssetPath) : 'undefined'}, zoom: ${post.featuredImage.zoom}, src: ${assetVariables.get(post.featuredImage.assetPath)} }`
       : 'undefined'
     const assets = [...post.assets].map(
       ([relativePath, assetPath]) =>
@@ -530,6 +698,13 @@ export function blogContentPlugin({
   root,
 }: BlogContentPluginOptions): Plugin {
   const contentRoot = path.join(root, 'content', 'posts')
+  const previewCacheDirectory = path.join(
+    root,
+    'node_modules',
+    '.cache',
+    'blog-worldline',
+    'previews',
+  )
 
   return {
     name: 'blog-content',
@@ -539,7 +714,11 @@ export function blogContentPlugin({
     },
     async load(id) {
       if (id !== resolvedVirtualModuleId) return
-      const { code, watchedFiles } = await createVirtualModule(contentRoot, includeDrafts)
+      const { code, watchedFiles } = await createVirtualModule(
+        contentRoot,
+        includeDrafts,
+        previewCacheDirectory,
+      )
       for (const filePath of watchedFiles) this.addWatchFile(filePath)
       return code
     },

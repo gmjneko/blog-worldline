@@ -2,7 +2,7 @@
 title: 记一次给 Spring AI 修 Bug
 published-at: 2026-05-24
 description: Spring AI 流式接口非流式 Bug 的排查与修复实录。
-featured-image: ./images/og-spring.png
+featured-image: ./images/firefly1.avif
 ---
 
 ## 问题复现

@@ -108,7 +108,8 @@ draft: false
 | `title` | 是 | — | 文章标题 |
 | `description` | 是 | — | 列表摘要和页面描述 |
 | `published-at` | 是 | — | 发布日期，格式必须是 `YYYY-MM-DD` |
-| `featured-image` | 否 | — | 缩略图相对路径，必须以 `./` 开头 |
+| `featured-image` | 否 | — | 文章主图相对路径，必须以 `./` 开头 |
+| `featured-image-preview` | 否 | 自动生成 | 手动指定卡片专用预览图并覆盖自动结果 |
 | `featured-image-alt` | 否 | 空字符串 | 缩略图替代文字 |
 | `featured-image-position` | 否 | `center` | 图片裁切焦点，对应 `object-position` |
 | `featured-image-zoom` | 否 | `1` | 图片放大比例，允许 `1` 到 `2` |
@@ -116,6 +117,8 @@ draft: false
 | `draft` | 否 | `false` | 是否为草稿 |
 
 开发环境会展示草稿，生产构建会自动排除 `draft: true` 的文章。
+
+构建插件会检查文章主图尺寸。宽度超过 `1200px`、高度超过 `900px`，或总像素超过 `100 万`时，会根据 `featured-image-position` 自动裁切并使用 Lanczos 重采样生成 `408 × 306` 的高质量 JPEG 卡片预览图。生成结果缓存在 `node_modules/.cache/blog-worldline/previews/`，源图或裁切焦点发生变化时会自动失效。手动设置 `featured-image-preview` 可以覆盖自动生成结果。
 
 ## 5. 图片
 

@@ -12,11 +12,14 @@ export function PostCard({ post }: PostCardProps) {
         {post.featuredImage && (
           <div className={styles.cover}>
             <img
-              src={post.featuredImage.src}
+              src={post.featuredImage.previewSrc ?? post.featuredImage.src}
               alt=""
               style={{
                 objectPosition: post.featuredImage.position,
-                transform: `scale(${post.featuredImage.zoom})`,
+                transform:
+                  post.featuredImage.zoom === 1
+                    ? undefined
+                    : `scale(${post.featuredImage.zoom})`,
               }}
             />
           </div>

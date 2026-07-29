@@ -13,6 +13,7 @@ export interface BlogCategory {
 export interface FeaturedImage {
   alt: string
   position: string
+  previewSrc?: string
   src: string
   zoom: number
 }
