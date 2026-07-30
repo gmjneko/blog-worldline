@@ -55,27 +55,11 @@
   box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
 }
 
-.navigationLink::after {
-  position: absolute;
-  inset: 0;
-  background: currentColor;
-  content: '';
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms var(--wl-ease-standard);
-}
-
-.navigationLink:active::after {
-  opacity: 0.12;
-  transition-duration: 0ms;
-}
-
 .navigationLink[aria-current='page'] {
   border-color: var(--wl-color-text-strong);
   color: var(--wl-color-background);
   background: var(--wl-color-text-strong);
   box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
-  animation: navigation-selection-in 220ms var(--wl-ease-standard);
 }
 
 .navigationItemContent {
@@ -124,20 +108,6 @@
   color: var(--wl-color-text-weak);
   background: transparent;
   box-shadow: none;
-}
-
-.navigationLinkDisabled::after {
-  display: none;
-}
-
-@keyframes navigation-selection-in {
-  from {
-    opacity: 0.72;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .mobileMenu {
@@ -266,14 +236,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .navigationLink {
-    transition: none;
-  }
-
-  .navigationLink[aria-current='page'] {
-    animation: none;
-  }
-
-  .navigationLink::after {
     transition: none;
   }
 

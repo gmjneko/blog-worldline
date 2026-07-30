@@ -47,36 +47,10 @@
   box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
 }
 
-.options a::after {
-  position: absolute;
-  inset: 0;
-  background: currentColor;
-  content: '';
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms var(--wl-ease-standard);
-}
-
-.options a:active::after {
-  opacity: 0.12;
-  transition-duration: 0ms;
-}
-
 .options a[aria-current='page'] {
   color: var(--wl-color-background);
   background: var(--wl-color-text-strong);
   box-shadow: 0 3px 10px rgb(8 6 13 / 9%);
-  animation: filter-selection-in 220ms var(--wl-ease-standard);
-}
-
-@keyframes filter-selection-in {
-  from {
-    opacity: 0.72;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 @media (max-width: 40rem) {
@@ -97,14 +71,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .options a {
-    transition: none;
-  }
-
-  .options a[aria-current='page'] {
-    animation: none;
-  }
-
-  .options a::after {
     transition: none;
   }
 }
