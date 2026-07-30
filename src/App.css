@@ -56,6 +56,9 @@
 
 .blog-intro h1 {
   margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.22em;
   color: var(--wl-color-text-strong);
   font-size: clamp(36px, 5vw, 58px);
   font-weight: 700;
@@ -63,9 +66,11 @@
   line-height: 1.1;
 }
 
-.blog-intro h1 span {
-  margin-top: 8px;
-  display: block;
+.blog-title-primary {
+  font-size: 0.76em;
+}
+
+.blog-title-secondary {
   color: var(--wl-color-text-weak);
   font-size: 0.42em;
   font-weight: 400;

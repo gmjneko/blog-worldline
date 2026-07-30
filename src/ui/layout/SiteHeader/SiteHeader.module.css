@@ -27,7 +27,7 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
 }
 
 .navigationLink {
@@ -115,10 +115,6 @@
 }
 
 @media (max-width: 60rem) {
-  .desktopNav {
-    gap: 4px;
-  }
-
   .navigationLink {
     padding-right: 8px;
     padding-left: 8px;

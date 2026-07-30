@@ -77,7 +77,7 @@ function getNavigation(activeSection: NavigationSection) {
     {
       href: '/navigation',
       icon: <DirectoryIcon />,
-      label: '导航站',
+      label: '导航',
       active: activeSection === 'navigation',
     },
     { href: '/cabin', icon: <CabinIcon />, label: '小屋', disabled: true },
@@ -155,7 +155,7 @@ function About() {
 
 function Navigation() {
   usePageMetadata(
-    'GMJneko | 导航站',
+    'GMJneko | 导航',
     '常用 AI 工具、技术社区与开发资源导航。',
   )
 
@@ -233,7 +233,9 @@ function BlogIndex({
         <section className="blog-intro" aria-labelledby="blog-title">
           <p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>
           <h1 id="blog-title">
-            文章 <span>/ Posts</span>
+            <span className="blog-title-primary">博客</span>
+            <span className="blog-title-secondary">/</span>
+            <span className="blog-title-secondary">Posts</span>
           </h1>
 
           <CategoryFilter

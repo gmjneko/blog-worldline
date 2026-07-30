@@ -54,7 +54,9 @@ export function NavigationPage() {
         <div className={styles.introCopy}>
           <p className={styles.eyebrow}>DIRECTORY / CURATED LINKS</p>
           <h1 id="navigation-title">
-            导航站 <span>/ Navigation</span>
+            <span className={styles.titlePrimary}>导航</span>
+            <span className={styles.titleSecondary}>/</span>
+            <span className={styles.titleSecondary}>Navigation</span>
           </h1>
         </div>
 

@@ -9,7 +9,9 @@ export function AboutPage() {
         <div className={styles.introCopy}>
           <p className={styles.eyebrow}>ABOUT / PROFILE</p>
           <h1 id="about-title">
-            关于我 <span>/ About Me</span>
+            <span className={styles.titlePrimary}>关于我</span>
+            <span className={styles.titleSecondary}>/</span>
+            <span className={styles.titleSecondary}>About Me</span>
           </h1>
 
           <div className={styles.prose}>
