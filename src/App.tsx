@@ -255,7 +255,12 @@ function BlogIndex({
           </div>
         </section>
 
-        <section id="posts" aria-label="文章列表">
+        <section
+          key={selectedCategory}
+          id="posts"
+          className="post-results"
+          aria-label="文章列表"
+        >
           {filteredPosts.length > 0 ? (
             <div className="post-grid">
               {filteredPosts.map((post) => (

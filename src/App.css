@@ -34,6 +34,7 @@
   z-index: 1;
   padding: 0 24px 64px;
   background: transparent;
+  animation: page-content-in 300ms ease-out both;
 }
 
 .blog-shell {
@@ -90,6 +91,30 @@
   border-top: 1px solid var(--wl-color-border);
   border-left: 1px solid var(--wl-color-border);
   background: rgb(255 255 255 / 24%);
+}
+
+.post-results {
+  animation: post-results-in 220ms ease-out both;
+}
+
+@keyframes page-content-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes post-results-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .empty-state {
@@ -201,5 +226,12 @@
 
   .not-found {
     padding: 72px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-main,
+  .post-results {
+    animation: none;
   }
 }
