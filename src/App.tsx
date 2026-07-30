@@ -117,7 +117,7 @@ function BlogLayout({
         brand="GMJneko"
         brandHref="/"
         brandLabel="博客"
-        brandLogoSrc="/atri.png"
+        brandLogoSrc="/atri_mini.png"
         navigation={getNavigation(activeSection)}
       />
 
