@@ -111,8 +111,7 @@ function BlogLayout({
 }) {
   return (
     <div id="top" className="blog-page">
-      <div className="ambient ambient--one" aria-hidden="true" />
-      <div className="ambient ambient--two" aria-hidden="true" />
+      <div className="screen-tone" aria-hidden="true" />
 
       <SiteHeader
         brand="GMJneko"
