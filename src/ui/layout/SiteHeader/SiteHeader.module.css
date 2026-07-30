@@ -5,14 +5,14 @@
   width: 100%;
   height: var(--wl-header-height);
   border-bottom: 1px solid var(--wl-color-border);
-  background: rgb(253 252 252 / 82%);
-  background: color-mix(
-    in srgb,
-    var(--wl-color-background) 82%,
-    transparent
+  background-color: transparent;
+  background-image: radial-gradient(
+    transparent 1px,
+    var(--wl-color-background) 1px
   );
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  backdrop-filter: blur(16px) saturate(150%);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: saturate(50%) blur(8px);
+  backdrop-filter: saturate(50%) blur(8px);
 }
 
 .inner {
@@ -212,14 +212,14 @@
     padding: 16px var(--wl-page-padding) 24px;
     display: grid;
     border-bottom: 1px solid var(--wl-color-border);
-    background: rgb(253 252 252 / 94%);
-    background: color-mix(
-      in srgb,
-      var(--wl-color-background) 94%,
-      transparent
+    background-color: transparent;
+    background-image: radial-gradient(
+      transparent 1px,
+      var(--wl-color-background) 1px
     );
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    backdrop-filter: blur(16px) saturate(150%);
+    background-size: 4px 4px;
+    -webkit-backdrop-filter: saturate(50%) blur(8px);
+    backdrop-filter: saturate(50%) blur(8px);
   }
 
   .mobileMenu nav > a,
