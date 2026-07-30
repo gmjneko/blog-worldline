@@ -7,7 +7,7 @@ export function AboutPage() {
     <article className={styles.page}>
       <section className={styles.intro} aria-labelledby="about-title">
         <div className={styles.introCopy}>
-          <p className={styles.eyebrow}>ABOUT / PROFILE</p>
+          {/*<p className={styles.eyebrow}>ABOUT / PROFILE</p>*/}
           <h1 id="about-title">
             <span className={styles.titlePrimary}>关于我</span>
             <span className={styles.titleSecondary}>/</span>

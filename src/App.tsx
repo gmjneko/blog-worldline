@@ -143,7 +143,7 @@ function About() {
           brandHref="/"
           meta={
             <>
-              <span>ABOUT / PROFILE</span>
+              {/*<span>ABOUT / PROFILE</span>*/}
               <span>© 2026</span>
             </>
           }
@@ -170,7 +170,7 @@ function Navigation() {
           brandHref="/"
           meta={
             <>
-              <span>DIRECTORY / CURATED LINKS</span>
+              {/*<span>DIRECTORY / CURATED LINKS</span>*/}
               <span>© 2026</span>
             </>
           }
@@ -231,7 +231,7 @@ function BlogIndex({
     <BlogLayout>
       <PageShell className="blog-main" contentClassName="blog-shell">
         <section className="blog-intro" aria-labelledby="blog-title">
-          <p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>
+          {/*<p className="eyebrow">GMJNEKO’S BLOG / WRITING</p>*/}
           <h1 id="blog-title">
             <span className="blog-title-primary">博客</span>
             <span className="blog-title-secondary">/</span>
@@ -287,7 +287,7 @@ function BlogIndex({
           brandHref="/"
           meta={
             <>
-              <span>MARKDOWN / STATIC CONTENT</span>
+              {/*<span>MARKDOWN / STATIC CONTENT</span>*/}
               <span>© 2026</span>
             </>
           }

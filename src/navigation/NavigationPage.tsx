@@ -52,7 +52,7 @@ export function NavigationPage() {
     <article className={styles.page}>
       <section className={styles.intro} aria-labelledby="navigation-title">
         <div className={styles.introCopy}>
-          <p className={styles.eyebrow}>DIRECTORY / CURATED LINKS</p>
+          {/*<p className={styles.eyebrow}>DIRECTORY / CURATED LINKS</p>*/}
           <h1 id="navigation-title">
             <span className={styles.titlePrimary}>导航</span>
             <span className={styles.titleSecondary}>/</span>
