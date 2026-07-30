@@ -4,7 +4,7 @@
   --wl-color-background-strong: hsl(0 5% 12%);
   --wl-color-background-strong-hover: hsl(0 5% 18%);
   --wl-color-interactive-soft: hsl(62 84% 88%);
-  --wl-color-text: hsl(0 1% 39%);
+  --wl-color-text: hsl(0 1% 32%);
   --wl-color-text-strong: hsl(0 5% 12%);
   --wl-color-text-weak: hsl(0 1% 60%);
   --wl-color-text-weaker: hsl(30 2% 81%);
@@ -52,7 +52,7 @@
     --wl-color-background-weak: hsl(0 6% 10%);
     --wl-color-background-strong: hsl(0 20% 96%);
     --wl-color-background-strong-hover: hsl(0 10% 88%);
-    --wl-color-text: hsl(0 3% 69%);
+    --wl-color-text: hsl(0 3% 74%);
     --wl-color-text-strong: hsl(0 20% 96%);
     --wl-color-text-weak: hsl(0 2% 56%);
     --wl-color-text-weaker: hsl(0 2% 31%);

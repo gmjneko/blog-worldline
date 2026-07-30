@@ -83,7 +83,7 @@ src/ui/styles/tokens.css
 | `--wl-color-background-strong` | `hsl(0 5% 12%)` | 主按钮、强对比区域 |
 | `--wl-color-background-strong-hover` | `hsl(0 5% 18%)` | 强背景悬停状态 |
 | `--wl-color-interactive-soft` | `hsl(62 84% 88%)` | 轻强调和文本选择 |
-| `--wl-color-text` | `hsl(0 1% 39%)` | 正文和普通说明 |
+| `--wl-color-text` | `hsl(0 1% 32%)` | 正文和普通说明 |
 | `--wl-color-text-strong` | `hsl(0 5% 12%)` | 标题、重要文字和链接 |
 | `--wl-color-text-weak` | `hsl(0 1% 60%)` | 元信息、次要标签和占位信息 |
 | `--wl-color-text-weaker` | `hsl(30 2% 81%)` | 图形纹理和非常弱的内容 |
