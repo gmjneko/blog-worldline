@@ -1,7 +1,7 @@
 :root {
   color: var(--wl-color-text);
   background: var(--wl-color-background);
-  font-family: var(--wl-font-mono);
+  font-family: var(--wl-font-mono), var(--wl-font-cjk);
   font-size: 16px;
   font-synthesis: none;
   line-height: 1.5;

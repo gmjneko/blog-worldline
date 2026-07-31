@@ -96,22 +96,30 @@ src/ui/styles/tokens.css
 全站基础字体：
 
 ```css
-font-family: var(--wl-font-mono);
+font-family: var(--wl-font-mono), var(--wl-font-cjk);
 ```
 
-当前字体栈：
+等宽字体栈（拉丁字符）：
 
 ```text
 IBM Plex Mono
+ui-monospace
 SFMono-Regular
 Consolas
 Liberation Mono
-Noto Sans Mono CJK SC
-Sarasa Mono SC
 monospace
 ```
 
-中文字体可能由系统回退字体渲染。正式选择 Web Font 时，需要同时检查：
+中文字符由 sans-serif 栈回退渲染：
+
+```text
+PingFang SC
+Microsoft YaHei
+Noto Sans CJK SC
+sans-serif
+```
+
+拉丁与代码保持等宽，中文回退到系统无衬线字体（macOS 苹方、Windows 雅黑）。正式选择 Web Font 时，需要同时检查：
 
 - 中文是否保持清晰而不过于机械。
 - 拉丁字符和代码是否具有明确的 `0/O`、`1/l/I` 区分。

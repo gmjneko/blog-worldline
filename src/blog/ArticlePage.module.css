@@ -165,7 +165,7 @@
   --prose-block-spacing: 16px;
 
   padding-top: 48px;
-  font-family: var(--wl-font-mono);
+  font-family: var(--wl-font-mono), var(--wl-font-cjk);
 }
 
 .article .prose {
