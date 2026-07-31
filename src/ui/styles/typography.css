@@ -33,6 +33,7 @@
   border: 1px solid var(--wl-color-border);
   border-radius: var(--wl-radius-md);
   background: var(--wl-color-background-weak);
+  font-family: var(--wl-font-code);
 }
 
 .wl-prose pre code {

@@ -10,10 +10,13 @@
   --wl-color-text-weaker: hsl(30 2% 81%);
   --wl-color-border: hsl(0 100% 3% / 12%);
 
-  --wl-font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas,
-    'Liberation Mono', monospace;
-  --wl-font-cjk: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC',
-    sans-serif;
+  --wl-font-mono-base: 'IBM Plex Mono', 'SFMono-Regular', Consolas,
+    'Liberation Mono';
+  --wl-font-cjk-base: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC';
+  --wl-font-body: var(--wl-font-mono-base), var(--wl-font-cjk-base),
+    ui-monospace, monospace;
+  --wl-font-code: var(--wl-font-mono-base), var(--wl-font-cjk-base),
+    ui-monospace, monospace;
 
   --wl-shell-width: 1080px;
   --wl-header-height: 60px;

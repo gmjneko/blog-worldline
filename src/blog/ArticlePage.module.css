@@ -165,7 +165,7 @@
   --prose-block-spacing: 16px;
 
   padding-top: 48px;
-  font-family: var(--wl-font-mono), var(--wl-font-cjk);
+  font-family: var(--wl-font-body);
 }
 
 .article .prose {
@@ -204,7 +204,7 @@
 }
 
 .prose :not(pre) > code {
-  font-family: var(--wl-font-mono);
+  font-family: var(--wl-font-code);
 }
 
 .article .prose blockquote {
@@ -263,7 +263,7 @@
   overflow: hidden;
   border-right: 1px solid var(--code-frame-border);
   color: #343940;
-  font-family: var(--wl-font-mono);
+  font-family: var(--wl-font-code);
   font-size: 14px;
   letter-spacing: 0;
   line-height: 23px;
