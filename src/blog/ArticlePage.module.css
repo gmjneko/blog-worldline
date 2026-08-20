@@ -125,7 +125,11 @@
 .description {
   max-width: 680px;
   margin: 24px 0 0;
-  color: var(--wl-color-text);
+  color: color-mix(
+    in srgb,
+    var(--wl-color-text) 68%,
+    var(--wl-color-text-strong)
+  );
   font-size: 16px;
   line-height: 1.9;
 }
@@ -172,7 +176,7 @@
   color: var(--wl-color-text-strong);
   color: color-mix(
     in srgb,
-    var(--wl-color-text) 68%,
+    var(--wl-color-text) 10%,
     var(--wl-color-text-strong)
   );
 }
