@@ -1,0 +1,48 @@
+/* Latin/code font used consistently across platforms. */
+@font-face {
+  font-family: 'Maple Mono Normal NL';
+  src: url('/fonts/MapleMonoNormalNL-Light.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Maple Mono Normal NL';
+  src: url('/fonts/MapleMonoNormalNL-SemiBold.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/*
+ * Noto Sans SC is deliberately scoped to CJK code points. The root .wl-windows
+ * class is added by main.tsx, so this face is never selected on macOS.
+ */
+@font-face {
+  font-family: 'Noto Sans SC Web';
+  src: url('/fonts/NotoSansSC-Regular.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  unicode-range:
+    U+3000-303F,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC Web';
+  src: url('/fonts/NotoSansSC-SemiBold.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  unicode-range:
+    U+3000-303F,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}

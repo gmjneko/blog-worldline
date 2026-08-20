@@ -102,23 +102,33 @@ font-family: var(--wl-font-body);
 等宽字体栈（拉丁字符）：
 
 ```text
+Maple Mono Normal NL Light
 IBM Plex Mono
 SFMono-Regular
 Consolas
 Liberation Mono
 ```
 
-中文字体与最终通用回退顺序：
+macOS 中文字体与最终通用回退顺序：
 
 ```text
 PingFang SC
-Microsoft YaHei
-Noto Sans CJK SC
-ui-monospace
-monospace
+Hiragino Sans GB
+sans-serif
 ```
 
-具体中文字体排列在通用字体族之前，避免 Windows 先通过 `monospace` 回退到宋体。拉丁与代码保持等宽，中文回退到系统无衬线字体（macOS 苹方、Windows 雅黑）。正式选择 Web Font 时，需要同时检查：
+Windows 会在 `html.wl-windows` 上切换为 Noto Sans SC 的简体中文子集，并保留系统中文字体作为加载失败时的回退；Mac 不添加这个类，因此继续使用苹方。Maple Mono 只加载 Light 和 SemiBold 两个常用字重，减少首屏字体请求，同时让正文和控件不显得过粗。
+
+```text
+Noto Sans SC Web
+Noto Sans SC
+Noto Sans CJK SC
+Microsoft YaHei UI
+Microsoft YaHei
+sans-serif
+```
+
+具体中文字体排列在通用字体族之前，避免 Windows 先通过 `monospace` 回退到宋体。拉丁与代码保持等宽，中文单独使用无衬线字体。正式选择 Web Font 时，需要同时检查：
 
 - 中文是否保持清晰而不过于机械。
 - 拉丁字符和代码是否具有明确的 `0/O`、`1/l/I` 区分。

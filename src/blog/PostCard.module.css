@@ -64,14 +64,14 @@
 
 .meta strong {
   color: var(--wl-color-text-strong);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .article h2 {
   margin: 0 0 8px;
   color: var(--wl-color-text-strong);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.45px;
   line-height: 1.45;
 }

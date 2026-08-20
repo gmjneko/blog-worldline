@@ -24,7 +24,7 @@
 
 .list strong {
   color: var(--wl-color-text-strong);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .list p {

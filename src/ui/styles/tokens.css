@@ -10,9 +10,9 @@
   --wl-color-text-weaker: hsl(30 2% 81%);
   --wl-color-border: hsl(0 100% 3% / 12%);
 
-  --wl-font-mono-base: 'IBM Plex Mono', 'SFMono-Regular', Consolas,
-    'Liberation Mono';
-  --wl-font-cjk-base: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC';
+  --wl-font-mono-base: 'Maple Mono Normal NL', 'IBM Plex Mono',
+    'SFMono-Regular', Consolas, 'Liberation Mono';
+  --wl-font-cjk-base: 'PingFang SC', 'Hiragino Sans GB', sans-serif;
   --wl-font-body: var(--wl-font-mono-base), var(--wl-font-cjk-base),
     ui-monospace, monospace;
   --wl-font-code: var(--wl-font-mono-base), var(--wl-font-cjk-base),
@@ -41,6 +41,13 @@
 
   --wl-duration-fast: 160ms;
   --wl-ease-standard: ease;
+}
+
+/* Windows has no PingFang SC. Noto Sans SC gives CJK text a neutral, macOS-like
+   sans-serif shape while the system faces remain a safe fallback. */
+html.wl-windows {
+  --wl-font-cjk-base: 'Noto Sans SC Web', 'Noto Sans SC',
+    'Noto Sans CJK SC', 'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif;
 }
 
 @media (max-width: 60rem) {
