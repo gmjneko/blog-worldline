@@ -3,6 +3,7 @@ title: 浅入浅出 Kotlin 协程
 published-at: 2026-07-27
 description: 协程是 Kotlin 里最容易"会用但说不清楚"的特性，本文试图用人话讲解协程的核心概念和心智模型。
 featured-image: ./images/kotlin-chan.jpg
+draft: true
 ---
 
 如果你使用过或者正在使用 Kotlin，那你大概率使用过它的协程，但你真的理解它吗？
