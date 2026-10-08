@@ -6,7 +6,10 @@ import {
   type ReactNode,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import 'katex/dist/katex.min.css'
 import type { BlogPost } from './content'
 import { resolvePostAsset } from './content'
 import { remarkImageSize } from './remarkImageSize'
@@ -282,7 +285,8 @@ export function ArticlePage({ post }: ArticlePageProps) {
 
         <div className={`wl-prose ${styles.prose}`}>
           <ReactMarkdown
-            remarkPlugins={[remarkGfm, remarkImageSize]}
+            remarkPlugins={[remarkGfm, remarkMath, remarkImageSize]}
+            rehypePlugins={[rehypeKatex]}
             components={{
               code: ({ children, className, node }) => (
                 <CodeBlock
