@@ -600,11 +600,10 @@ kotlin.ClassCastException: class Section.Table cannot be cast to class Section.R
 
 这解释了为何源码没有显式 `as`，运行时仍会出现 `ClassCastException`：该 cast 由编译器生成，检查也由编译器生成。
 
-> 编译器：我拍胸脯保证类型转换没问题。
->
-> Runtime：你先看看你拍的是谁的胸脯。
+> 编译器：类型转换包没问题的。（恰腰）
+> ![Runtime Belike](./images/cat_head.jpeg)
+> Runtime：你先看看你恰的是谁的腰。
 
-![Runtime Belike](./images/cat_head.png)
 
 #### Release：去虚化放大了错误类型信息
 
