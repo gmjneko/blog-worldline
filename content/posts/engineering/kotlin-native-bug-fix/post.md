@@ -217,9 +217,9 @@ kotlin {
 Kotlin/Native 的编译大致分成两个阶段：
 
 ```
-第一阶段（编译）：  .kt  ->  前端 K2  ->  IR  ->  .klib
+第一阶段（编译）：  .kt  -->  前端 K2  -->  IR  -->  .klib
 
-第二阶段（链接）：  所有 .klib  ->  内联 / lowering / 优化  ->  LLVM  ->  可执行文件
+第二阶段（链接）：  所有 .klib  -->  内联 / lowering / 优化  -->  LLVM  -->  可执行文件
 ```
 
 - **第一阶段**：编译器前端（K2）做语法分析（Parsing）和类型检查（Type Checking），把代码转成 IR（Intermediate Representation，中间表示），并序列化成 `.klib` 文件。Gradle 里的 `compileKotlinMacosArm64` 属于此阶段。
