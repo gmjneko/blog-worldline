@@ -209,6 +209,8 @@
 
 .prose :not(pre) > code {
   font-family: var(--wl-font-code);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .article .prose blockquote {
